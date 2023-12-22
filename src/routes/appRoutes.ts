@@ -1,12 +1,14 @@
 
 export const appRoutes = {
-  LOGIN: "/",
-  SIGNUP: "/signup",
+  USER_LOGIN:"/",
+  ADMIN_LOGIN: "/admin/login",
+  SIGNUP: "signup",
+  EMPLOYEE_LIST:"employee-list",
   FORGOT_PASSWORD: "/forgot-password",
   RESET_PASSWORD: "/reset-password",
-  OTP_VERIFY: "/otp-verify",
+  ADMIN_OTP_VERIFY: "/otp-verify",
   CHANGE_PASSWORD: "/change-password",
-  EMPLOYEE_LIST: "/employee-list"
+  ADMIN_DASHBOARD: "/dashboard"
 } as const;
 
 export type AppRouteKey = keyof typeof appRoutes;

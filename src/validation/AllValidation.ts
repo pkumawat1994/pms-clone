@@ -5,7 +5,7 @@ const ALL_REGEX = {
 };
 
 export const LoginValidationSchema = yup.object({
-  emp_email: yup
+  email: yup
     .string()
 
     .email("Enter a valid email")
@@ -14,7 +14,7 @@ export const LoginValidationSchema = yup.object({
       "Please enter valid email"
     )
     .required("Email is required"),
-  emp_password: yup
+  password: yup
     .string()
 
     .required("Password is required"),
@@ -28,8 +28,8 @@ export const ChangePasswordValidationSchema = yup.object({
   oldPassword: yup.string().required("old Password is required"),
 });
 
-export const forgotPassValidationSchema = yup.object({
-  emp_email: yup
+export const adminForgotPassValidationSchema = yup.object({
+  email: yup
     .string()
     .email("Enter a valid email")
     .required("Email is required "),
@@ -53,7 +53,7 @@ export const SignupValidationSchema = yup.object({
     .max(20, "Name cannot exceed 20 characters")
     .matches(/^[A-Za-z]+$/, "Name should contain only letters")
     .required("Name is Required"),
-  emp_mobile: yup
+    emp_phoneNumber: yup
     .string()
     .required("Mobile number is required")
     .matches(/^(\+\d{1,3}[- ]?)?\d{10}$/, "Please enter valid mobile number"),
@@ -65,6 +65,13 @@ export const SignupValidationSchema = yup.object({
     .string()
     .min(8, "Password should be of minimum 8 characters length")
     .required("Password is required"),
+
+    emp_role: yup
+    .string()
+    .required("role is required"),
+    emp_dateofbirth:yup
+    .string()
+    .required("Please select Birthday "),
   confirm_Password: yup
     .string()
     .oneOf([yup.ref("emp_password")], "Passwords and confirm password is  should be match")

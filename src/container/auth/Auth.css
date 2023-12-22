@@ -1,5 +1,5 @@
 .form-container {
-  background-color:#dfe4ea;
+  background-color: #5f27cd;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -7,7 +7,7 @@
   height: 100vh;
 }
 .form-container .form-wrapper {
-  box-shadow: 10px 10px 10px 10px  grey;
+  /* box-shadow: 10px 10px 10px 10px  grey; */
 
   background-color:#f1f2f6;
   width: 100%;
@@ -26,7 +26,8 @@
   height: 100vh;
   justify-content: center;
   align-items: center;
-  background-color: rgb(179, 236, 156);
+  background-color: #5f27cd;
+
 }
 
 .forgot-form {
@@ -91,3 +92,16 @@ margin-top: 10px;
   justify-content: center;
   margin-top: 10px;
 }
+
+.form-btn-wrap .form-btn {
+  border-radius: 20px;
+  margin-top: 10px;
+  background: rgb(131, 58, 180);
+  background: linear-gradient(
+    90deg,
+    rgba(131, 58, 180, 1) 0%,
+    rgba(253, 29, 29, 1) 50%,
+    rgba(252, 176, 69, 1) 100%
+  );
+}
+
