@@ -56,16 +56,16 @@ const AdminSidebar = ({open,handleDrawerClose}:any) => {
         <List>
        
             <ListItem disablePadding>
-            <ListItemButton>
+            <Link to="/dashboard/task-list"><ListItemButton>
               <ListItemIcon>
                <MailIcon />
               </ListItemIcon>
               <ListItemText primary={"TASK LIST"} />
-            </ListItemButton>
+            </ListItemButton></Link>
           </ListItem>
 
           <ListItem disablePadding>
-           <Link to="/dashboard/signup"> <ListItemButton>
+           <Link to="/dashboard/employee-list"> <ListItemButton>
               <ListItemIcon>
                <MailIcon />
               </ListItemIcon>

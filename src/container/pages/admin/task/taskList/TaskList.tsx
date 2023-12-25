@@ -1,28 +1,22 @@
+import React from 'react'
+import { TaskListController } from './TaskListController';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import "./EmployeeList.css"
-import { EmployeeListController } from './EmployeeListController';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../../../redux/rootReducer';
 import ComponentIndex from '../../../../../components/ComponentIndex';
-import { Link } from 'react-router-dom';
 
-const EmployeeList = () => {
-    const userToken = useSelector((state: RootState) => state);
-    console.log(userToken,"staee")
+const TaskList = () => {
+  const { handleEdit, handleDelete, taskData ,handleLogoutClick} = TaskListController();
 
-    const { handleEdit, handleDelete, employeeData ,handleLogoutClick} = EmployeeListController();
+  const dataWithSerialNumbers = taskData?.map((task:{}, index:number) => ({
+    ...task,
+    serialNumber: index + 1,
+}));
 
-    const dataWithSerialNumbers = employeeData?.map((employee:any, index) => ({
-        ...employee,
-        serialNumber: index + 1,
-    }));
-
-    const columns: GridColDef[] = [
+const columns: GridColDef[] = [
         { field: 'serialNumber', headerName: 'ID', width: 70 },
-        { field: 'emp_code', headerName: 'EMP CODE', width: 130 },
-        { field: 'emp_name', headerName: 'EMP NAME', width: 150 },
-        { field: 'emp_email', headerName: 'EMP EMAIL ', width: 150 },
-        { field: 'emp_mobile', headerName: 'EMP MOBILE  ', width: 150 },
+        { field: 'emp_code', headerName: 'TASK CODE', width: 130 },
+        { field: 'emp_name', headerName: 'TASK NAME', width: 150 },
+        // { field: 'emp_email', headerName: 'EMP EMAIL ', width: 150 },
+        // { field: 'emp_mobile', headerName: 'EMP MOBILE  ', width: 150 },
         {
             field: 'actions',
             headerName: 'Actions',
@@ -39,17 +33,13 @@ const EmployeeList = () => {
             }
         }
     ];
-
- 
     const getRowId = (row: any) => row?._id;
 
-    return (<>
-         
-     
-      
-        <ComponentIndex.Box className="back-btn"  >
+  return (
+  <>
+  <ComponentIndex.Box className="back-btn"  >
                 {/* <ComponentIndex.ArrowBackIcon  onClick={handleBack} /> */}
-                    <Link to="/dashboard/add-employee"><ComponentIndex.Button color="warning"  variant='contained'>ADD EMPLOYEE</ComponentIndex.Button></Link>
+                    <ComponentIndex.Link to="/dashboard/add-task"><ComponentIndex.Button color="warning"  variant='contained'>ADD TASK</ComponentIndex.Button></ComponentIndex.Link>
               
                     {/* <ComponentIndex.Button color="warning" onClick={handleLogoutClick} variant='contained'>LOGOUT</ComponentIndex.Button> */}
 
@@ -58,7 +48,7 @@ const EmployeeList = () => {
       
                 <ComponentIndex.Box className="list-inner-main-wrapper">
 
-                {employeeData?.length === 0 ? (
+                {taskData?.length === 0 ? (
                         <p className='not-found'>No records found</p>
                     ) : (
                         <DataGrid
@@ -76,11 +66,8 @@ const EmployeeList = () => {
                     {/* {employeeData.length === 0 && <p>No records found</p>} */}
                 </ComponentIndex.Box>
             </ComponentIndex.Box>
-
-      
-
-    </>
-    )
+  </>
+  )
 }
 
-export default EmployeeList
+export default TaskList

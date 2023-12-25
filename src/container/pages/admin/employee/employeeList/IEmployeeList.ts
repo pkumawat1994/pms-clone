@@ -1,7 +1,7 @@
 
 
 export interface employeeIDT {
-    empId: string;
+    id: string;
    
   }
 
