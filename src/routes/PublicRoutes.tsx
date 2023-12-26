@@ -11,6 +11,9 @@ import { appRoutes } from './appRoutes'
 import AdminDashboard from '../components/admin/dashboard/AdminDashboard'
 import AdminLogin from '../container/auth/userAuth/login/UserLogin'
 import Signup from '../container/pages/admin/employee/addEmployee/SignUp'
+import EmployeeList from '../container/pages/admin/employee/employeeList/EmployeeList'
+import TaskList from '../container/pages/admin/task/taskList/TaskList'
+import AddTask from '../container/pages/admin/task/addTask/AddTask'
 
 // import UserLogin from '../container/auth/userAuth/login/UserLogin'
 // import Signup from '../container/auth/userAuth/signup/SignUp'
@@ -29,10 +32,10 @@ const PublicRoutes = () => {
         <Route  path={appRoutes.USER_LOGIN} element={<AdminLogin/>}  />
 
         <Route path="dashboard" element={<AdminDashboard />}>
-        <Route  path={appRoutes.SIGNUP} element={<Signup/>}  />
-       
-
-
+        <Route  path={appRoutes.ADD_EMPLOYEE} element={<Signup/>}  />
+        <Route  path={appRoutes.EMPLOYEE_LIST} element={<EmployeeList/>}  />
+        <Route  path={appRoutes.TASK_LIST} element={<TaskList/>}  />
+        <Route  path={appRoutes.ADD_TASK} element={<AddTask/>}  />
         </Route>
 
         

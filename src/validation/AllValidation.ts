@@ -77,3 +77,32 @@ export const SignupValidationSchema = yup.object({
     .oneOf([yup.ref("emp_password")], "Passwords and confirm password is  should be match")
     .required("Confirm Password is required"),
 });
+
+
+export const addTaskValidationSchema = yup.object({
+  title: yup
+    .string()
+    .max(20, "Title cannot exceed 20 characters")
+    .matches(/^[A-Za-z]+$/, "Name should contain only letters")
+    .required("Title is Required"),
+   
+    description: yup
+    .string()
+    .max(40, "Description cannot exceed 40 characters")
+    .matches(/^[A-Za-z]+$/, "Description should contain only letters")
+    .required("Description is Required"),
+
+  assignee: yup
+    .string()
+    .required("Assignee is required"),
+
+    taskDuration: yup
+    .string()
+    .required("TaskDuration is required"),
+
+    assignDate:yup
+    .string()
+    .required("Please select AssignDate "),
+    dueDate:yup.string().required("Please select Due date")
+  
+});

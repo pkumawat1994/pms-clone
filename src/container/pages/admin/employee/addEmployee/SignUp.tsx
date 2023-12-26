@@ -10,9 +10,8 @@ const Signup: React.FC = () => {
     return (
         <>
             <ComponentIndex.Box className="register_box">
-
             <ComponentIndex.Box className="form-heading">
-                            <h3 style={{textAlign:"center"}}>{data?.state?.data ? "UPDATE USER" : "REGISTER"}</h3>
+                            <h3 style={{textAlign:"center"}}>{data?.state?.data ? "UPDATE EMPLOYEEE" : "ADD EMPLOYEE"}</h3>
                         </ComponentIndex.Box>
                         <form onSubmit={formik.handleSubmit}>
                 <ComponentIndex.Grid container spacing={2}>

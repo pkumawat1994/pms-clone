@@ -1,16 +1,16 @@
 import { useFormik } from "formik";
-import { signupFormValues } from "./ISignup";
+import { addtaskFormValues } from "./IAddTask";
 
 
 // import {  signUpUSer } from "../../../../redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "../../../../../redux/store";
-import { SignupValidationSchema } from "../../../../../validation/AllValidation";
-import { getRoleList, signUpUSer } from "../../../../../redux";
+import { SignupValidationSchema, addTaskValidationSchema } from "../../../../../validation/AllValidation";
+import { addTask, getRoleList, signUpUSer } from "../../../../../redux";
 
 
-export const SignupController = () => {
+export const AddTaskController = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm_Password, setshowConfirm_Password] = useState(false);
 
@@ -21,25 +21,23 @@ export const SignupController = () => {
   let data = useLocation();
   console.log("data",data)
 
-  const formik = useFormik<signupFormValues>({
+  const formik = useFormik<addtaskFormValues>({
     initialValues: {
-        emp_name: data?.state?.data ? data?.state.data?.emp_name : "",
-        emp_phoneNumber: data?.state?.data ? data?.state?.data?.emp_phoneNumber : "",
-        emp_email: data?.state?.data ? data?.state?.data?.emp_email : "",
-        emp_password: data?.state?.data ? data?.state?.data?.emp_password : "",
-        confirm_Password: data?.state?.data ? data?.state?.data?.confirm_Password : "",
-        emp_role: data?.state?.data ? data?.state?.data?.role : "",
-        emp_dateofbirth:  data?.state?.data ? data?.state?.data?.emp_dateofbirth :""
-
-        // emp_profileImage: "",
+        title: data?.state?.data ? data?.state.data?.title : "",
+        description: data?.state?.data ? data?.state?.data?.description : "",
+        assignee: data?.state?.data ? data?.state?.data?.assignee : "",
+        taskDuration: data?.state?.data ? data?.state?.data?.taskDuration : "",
+        assignDate: data?.state?.data ? data?.state?.data?.assignDate : "",
+        dueDate: data?.state?.data ? data?.state?.data?.dueDate : ""
+   
     },
     validateOnChange: true,
-    validationSchema: SignupValidationSchema,
+    validationSchema: addTaskValidationSchema,
 
-    onSubmit: async (values: signupFormValues, actions) => {
+    onSubmit: async (values: addtaskFormValues, actions) => {
 
         console.log("singu-Userrr",values)
-          await dispatch(signUpUSer({ data: values, navigate }));
+          await dispatch(addTask({ data: values, navigate }));
 
       try {
         actions.setSubmitting(true);

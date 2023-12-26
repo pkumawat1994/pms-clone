@@ -12,6 +12,7 @@ import { AxiosError } from "axios";
 import { appRoutes } from "../routes/appRoutes";
 import { employeeIDT } from "../container/pages/admin/employee/employeeList/IEmployeeList";
 import { signupFormValues } from "../container/pages/admin/employee/addEmployee/ISignup";
+import { addtaskFormValues } from "../container/pages/admin/task/addTask/IAddTask";
 // import { signupFormValues } from "../container/auth/userAuth/signup/ISignup";
 
 function isAxiosError(error: unknown): error is AxiosError {
@@ -44,12 +45,53 @@ export const loginAdmin = createAsyncThunk(
   }
 );
 
+export const getRoleList = createAsyncThunk(
+  "getRoleList",
+  async ({ navigate }: { navigate: NavigateFunction }, { rejectWithValue }) => {
+    try {
+      const response = await DataService.get(API.GET_ROLELIST);
+      console.log(response?.data, "GET_ROLELIST");
+
+      return response;
+    } catch (error: unknown) {
+      if (isAxiosError(error)) {
+        return rejectWithValue((error as AxiosError).response?.data);
+      } else {
+        const responseData = (error as { response?: { data?: [] } })?.response;
+        return rejectWithValue(responseData);
+      }
+    }
+  }
+);
+
+
 export const getEmployeeList = createAsyncThunk(
   "getEmployeeList",
   async ({ navigate }: { navigate: NavigateFunction }, { rejectWithValue }) => {
     try {
       const response = await DataService.get(API.GET_EMPLIST);
       console.log(response?.data?.message, "GET_EMP");
+
+      return response;
+    } catch (error: unknown) {
+      if (isAxiosError(error)) {
+        return rejectWithValue((error as AxiosError).response?.data);
+      } else {
+        const responseData = (error as { response?: { data?: [] } })?.response;
+        return rejectWithValue(responseData);
+      }
+    }
+  }
+);
+
+
+
+export const getTaskList = createAsyncThunk(
+  "getTaskList",
+  async ({ navigate }: { navigate: NavigateFunction }, { rejectWithValue }) => {
+    try {
+      const response = await DataService.get(API.GET_TASK_LIST);
+      console.log(response?.data?.message, "GET_TASK_LIST");
 
       return response;
     } catch (error: unknown) {
@@ -70,7 +112,7 @@ export const deleteEmployee = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      let obj = { empId: data };
+      let obj = { id: data };
       const response = await DataService.post(API.DELETE_EMP, obj);
       console.log(response?.data?.message, "DELETE_EMP");
       if (response?.data?.status == 200) {
@@ -311,3 +353,62 @@ export const signUpUSer = createAsyncThunk(
     }
   }
 );
+
+
+export const addTask = createAsyncThunk(
+  "auth/addTask",
+  async (
+    { data, navigate }: { data: addtaskFormValues; navigate: NavigateFunction },
+    { rejectWithValue }
+  ) => {
+    try {
+      
+      const response = await DataService.post(API.ADD_TASK, data);
+      console.log("ADD_TASK",response)
+      if (response.data.status == 200) {
+        // localStorage.setItem("userToken", response?.data?.data?.token);
+        // alert("navigate-to-login")
+        navigate(appRoutes.TASK_LIST);
+      }
+      return response;
+    } catch (error: unknown) {
+      if (isAxiosError(error)) {
+        return rejectWithValue((error as AxiosError).response?.data);
+      } else {
+        const responseData = (error as { response?: { data?: [] } })?.response
+          ?.data;
+        return rejectWithValue(responseData);
+      }
+    }
+  }
+);
+
+
+
+//get-employee------
+// export const getEmployeeList = createAsyncThunk(
+//   "auth/otpVerify",
+//   async (
+//     {  navigate }: {  navigate: NavigateFunction },
+//     { rejectWithValue }
+//   ) => {
+//     try {
+//       // DataService.defaults.headers.common["auth"] = data.token;
+//       const response = await DataService.get(API.ADMIN_OTP_VERIFY);
+//       console.log(response, "ressppToken");
+
+//       if (response?.data?.status == 200) {
+//         navigate(appRoutes.RESET_PASSWORD, { state: response?.data?.data?.token });
+//       }
+//       return response;
+//     } catch (error: unknown) {
+//       if (isAxiosError(error)) {
+//         return rejectWithValue((error as AxiosError).response?.data);
+//       } else {
+//         const responseData = (error as { response?: { data?: [] } })?.response
+//           ?.data;
+//         return rejectWithValue(responseData);
+//       }
+//     }
+//   }
+// );

@@ -2,7 +2,13 @@
 export const appRoutes = {
   USER_LOGIN:"/",
   ADMIN_LOGIN: "/admin/login",
-  SIGNUP: "signup",
+  // SIGNUP: "add-employee",
+  ADD_EMPLOYEE:"add-employee",
+  TASK_LIST:"task-list",
+  ADD_TASK:"add-task",
+  
+  
+
   EMPLOYEE_LIST:"employee-list",
   FORGOT_PASSWORD: "/forgot-password",
   RESET_PASSWORD: "/reset-password",
