@@ -2,6 +2,7 @@ import React from 'react'
 import { TaskListController } from './TaskListController';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import ComponentIndex from '../../../../../components/ComponentIndex';
+import { taskId } from './ITaskList';
 
 const TaskList = () => {
     const { handleEdit, handleDelete, taskData, handleLogoutClick } = TaskListController();
@@ -13,10 +14,23 @@ const TaskList = () => {
 
     const columns: GridColDef[] = [
         { field: 'serialNumber', headerName: 'ID', width: 70 },
-        { field: 'emp_code', headerName: 'TASK CODE', width: 130 },
-        { field: 'emp_name', headerName: 'TASK NAME', width: 150 },
-        // { field: 'emp_email', headerName: 'EMP EMAIL ', width: 150 },
-        // { field: 'emp_mobile', headerName: 'EMP MOBILE  ', width: 150 },
+        { field: 'taskCode', headerName: 'TASK CODE', width: 130 },
+        { field: 'title', headerName: 'TASK NAME', width: 150 },
+        { field: 'status', headerName: 'TASK STATUS', width: 150 },
+        // { field: 'assignedBy.name', headerName: 'ASSIGN BY', width: 150 },
+        {
+            field: 'assignedBy',
+            headerName: 'Assigned By',
+            width: 150,
+            renderCell: (params) =>
+              {console.log("pat",params)
+                return(<>
+
+<span>{params.row.assignedBy && params.row.assignedBy.name}</span>
+
+            </>)} 
+         
+          },
         {
             field: 'actions',
             headerName: 'Actions',
@@ -26,7 +40,7 @@ const TaskList = () => {
                     <ComponentIndex.Button onClick={() => handleEdit(params?.row)} color="success" variant="contained" fullWidth type="submit">
                         EDIT
                     </ComponentIndex.Button>&nbsp;&nbsp;&nbsp;
-                    <ComponentIndex.Button onClick={() => handleDelete(params.row._id)} color="error" variant="contained" fullWidth type="submit">
+                    <ComponentIndex.Button onClick={() => handleDelete(params?.id as taskId)} color="error" variant="contained" fullWidth type="submit">
                         DELETE
                     </ComponentIndex.Button>
                 </>)

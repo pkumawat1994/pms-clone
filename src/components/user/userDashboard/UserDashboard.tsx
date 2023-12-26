@@ -79,7 +79,6 @@ export default function UserDashboard() {
 {/* header */}
       <UserHeader open={open} handleDrawerOpen={handleDrawerOpen}/>
 
-
 {/* sidebar */}
      <UserSidebar open={open} handleDrawerClose={handleDrawerClose} />
 

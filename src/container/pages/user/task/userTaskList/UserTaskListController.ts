@@ -20,13 +20,14 @@ export const UserTaskListController = () => {
   }, []);
   console.log(taskData,"taskData")
   // /employee/delete-employee
-  const handleDelete = (id: taskId) => {
+  const handleDelete = (id: any) => {
+
     // dispatch(deleteEmployee({ data: id, navigate })).then((res:any) => {
     //     // console.log(res,"deleteEmployee-response")
     //   if (res.payload.data.status == 200) {
     //     dispatch(getEmployeeList({ navigate })).then((res:any) =>{
     //         console.log(res,"getEmployeeList-respomnse")
-    //         setEmployeeData(res?.payload?.data?.data)
+    //         // setEmployeeData(res?.payload?.data?.data)
     //     }
     //     );
     //   }
@@ -38,7 +39,7 @@ export const UserTaskListController = () => {
   const handleEdit = (data: {}) => {
     // Handle edit logic with the provided ID
     console.log(data);
-    // navigate("/dashboard/add-employee", { state: { data } });
+    navigate("/user/dashboard/add-task", { state: { data } });
   };
 
   const handledTaskDetail = (data:any) => {

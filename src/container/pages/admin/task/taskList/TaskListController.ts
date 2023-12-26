@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 // import { logOut } from "../../../../redux/AllSlices/authSlices/AuthSlice";
 import { useAppDispatch } from "../../../../../redux/store";
-import { deleteEmployee, getEmployeeList, getTaskList } from "../../../../../redux";
+import { deleteEmployee, deleteTask, getEmployeeList, getTaskList } from "../../../../../redux";
 import { appRoutes } from "../../../../../routes/appRoutes";
 import { taskId } from "./ITaskList";
 
@@ -21,16 +21,15 @@ export const TaskListController = () => {
   console.log(taskData,"taskData")
   // /employee/delete-employee
   const handleDelete = (id: taskId) => {
-    // dispatch(deleteEmployee({ data: id, navigate })).then((res:any) => {
-    //     // console.log(res,"deleteEmployee-response")
-    //   if (res.payload.data.status == 200) {
-    //     dispatch(getEmployeeList({ navigate })).then((res:any) =>{
-    //         console.log(res,"getEmployeeList-respomnse")
-    //         setEmployeeData(res?.payload?.data?.data)
-    //     }
-    //     );
-    //   }
-    // });
+    console.log(id,"delete-id")
+    dispatch(deleteTask({ data: id, navigate })).then((res:any) => {
+        // console.log(res,"deleteEmployee-response")
+      if (res?.payload?.data?.status == 200) {
+        dispatch(getTaskList({ navigate })).then((res: any) =>
+        setTaskData(res?.payload?.data?.data)
+        );
+      }
+    });
   };
   const handleLogoutClick=()=>{
     // dispatch(logOut());
@@ -38,7 +37,7 @@ export const TaskListController = () => {
   const handleEdit = (data: {}) => {
     // Handle edit logic with the provided ID
     console.log(data);
-    // navigate("/dashboard/add-employee", { state: { data } });
+    navigate("/admin/dashboard/add-task", { state: { data } });
   };
   
   return {

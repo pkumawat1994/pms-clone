@@ -3,7 +3,7 @@ import { signupFormValues } from "./IAddEmployee";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "../../../../../redux/store";
-import { SignupValidationSchema } from "../../../../../validation/AllValidation";
+import { SignupValidationSchema, UpdateEmployeeValidationSchema } from "../../../../../validation/AllValidation";
 import { addEmployee, getRoleList } from "../../../../../redux";
 import { AxiosResponse } from "axios";
 import { PayloadAction } from "@reduxjs/toolkit";
@@ -34,7 +34,7 @@ export const SignupController = () => {
         // emp_profileImage: "",
     },
     validateOnChange: true,
-    validationSchema: SignupValidationSchema,
+    validationSchema:data?.state?.data ? UpdateEmployeeValidationSchema :SignupValidationSchema ,
 
     onSubmit: async (values: signupFormValues, actions) => {
 
@@ -45,6 +45,9 @@ export const SignupController = () => {
 
         if (data?.state?.data) {
           alert("hello Update");
+          console.log(90,data?.state?.data?._id)
+          const updateObj={...values,id:data?.state?.data?._id}
+          // await dispatch(updateEmployee({ data: values, navigate }));
         } else {
             // console.log("singu-Userrr",values)
                   await dispatch(addEmployee({ data: values, navigate }));

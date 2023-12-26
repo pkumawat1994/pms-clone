@@ -22,11 +22,9 @@ export const EmployeeListController = () => {
     dispatch(deleteEmployee({ data: id, navigate })).then((res:any) => {
         // console.log(res,"deleteEmployee-response")
       if (res.payload.data.status == 200) {
-        dispatch(getEmployeeList({ navigate })).then((res:any) =>{
-            console.log(res,"getEmployeeList-respomnse")
-            setEmployeeData(res?.payload?.data?.data)
-        }
-        );
+        dispatch(getEmployeeList({ navigate })).then((res: any) =>
+      setEmployeeData(res?.payload?.data?.data)
+    );
       }
     });
   };

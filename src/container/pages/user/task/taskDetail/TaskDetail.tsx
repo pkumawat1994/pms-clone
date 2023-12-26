@@ -22,6 +22,8 @@ import Tab from '@mui/material/Tab';
 import { useStopwatch } from "react-timer-hook";
 import { TimerProvider } from "./TimerContext";
 import MyStopwatch from "./MyStopwatch";
+import { useAppDispatch } from "../../../../../redux/store";
+import {  updateStatus } from "../../../../../redux";
 
 
 interface TabPanelProps {
@@ -59,7 +61,7 @@ const TaskDetail: React.FC = () => {
   const [value, setValue] = React.useState<number>(0);
   const singleTask = useLocation();
 
-  const dispatch = useDispatch();
+  let dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const [seconds, setSeconds] = useState<number>(0);
@@ -67,9 +69,6 @@ const TaskDetail: React.FC = () => {
   const [hours, setHours] = useState<number>(0);
   const [isRunning, setIsRunning] = useState<boolean>(false);
   let interval: NodeJS.Timeout;
-
-
-
 
   const [wasTimerStopped, setWasTimerStopped] = useState<boolean>(false);
 
@@ -104,11 +103,6 @@ const TaskDetail: React.FC = () => {
       setWasTimerStopped(false);
     }
   }, [wasTimerStopped]);
-
-
-
-
-
 
 
 
@@ -162,6 +156,8 @@ const TaskDetail: React.FC = () => {
 
       const handleChange = (event: SelectChangeEvent<string>) => {
             setTaskStatus(event.target.value);
+            const modyfyData={id:singleTask?.state?._id,status:taskStatus}
+            // dispatch(updateStatus(modyfyData))
           };
 
   return (

@@ -23,9 +23,14 @@ const UserTaskList = () => {
             field: 'assignedBy',
             headerName: 'Assigned By',
             width: 150,
-            renderCell: (params) => (
-              <span>{params.row.assignedBy && params.row.assignedBy.name}</span>
-            ),
+            renderCell: (params) =>
+              {console.log("pat",params)
+                return(<>
+
+<span>{params.row.assignedBy && params.row.assignedBy.name}</span>
+
+            </>)} 
+         
           },
         {
             field: 'actions',
@@ -33,14 +38,14 @@ const UserTaskList = () => {
             width: 350,
             renderCell: (params) => {
                 return (<>
-                    <ComponentIndex.Button onClick={() => handleEdit(params?.row)} color="success" variant="contained" fullWidth type="submit">
+                    {/* <ComponentIndex.Button onClick={() => handleEdit(params?.row)} color="success" variant="contained" fullWidth type="submit">
                         EDIT
                     </ComponentIndex.Button>&nbsp;&nbsp;&nbsp;
-                    <ComponentIndex.Button onClick={() => handleDelete(params.row._id)} color="error" variant="contained" fullWidth type="submit">
+                    <ComponentIndex.Button onClick={() => handleDelete(params?.id)} color="error" variant="contained" fullWidth type="submit">
                        <ComponentIndex.DeleteIcon/>
-                    </ComponentIndex.Button>&nbsp;&nbsp;&nbsp;
+                    </ComponentIndex.Button>&nbsp;&nbsp;&nbsp; */}
                     <ComponentIndex.Button onClick={() => handledTaskDetail(params.row)} color="warning" variant="contained" fullWidth type="submit">
-                    <ComponentIndex.RemoveRedEyeIcon/>
+                    <ComponentIndex.RemoveRedEyeIcon/>&nbsp;&nbsp;VIEW TASK
                     </ComponentIndex.Button>
                   
                 </>)

@@ -19,7 +19,7 @@ export const AddTaskController = () => {
   let navigate = useNavigate();
  
   let data = useLocation();
-  console.log("data",data)
+  console.log("edit-data",data)
 
   const formik = useFormik<addtaskFormValues>({
     initialValues: {

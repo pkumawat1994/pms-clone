@@ -17,7 +17,8 @@ data?:Object
 
 export interface AuthState {
   loading: boolean;
-  tokenFromRedux:string;
+  userTokenFromRedux:string;
+  adminTokenFromRedux:string;
 }
 
 export interface rejectedPayload {

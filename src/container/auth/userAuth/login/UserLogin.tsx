@@ -71,8 +71,6 @@ const AdminLogin: React.FC = () => {
               <Link to="/user-forgot-password"><p>forgot password </p></Link>
             </ComponentIndex.Box>
 
-
-
             <ComponentIndex.Box className="form-btn-wrap">
               <ComponentIndex.Button color="primary" variant="contained" className="form-btn" fullWidth type="submit">
                 login

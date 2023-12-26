@@ -3,3 +3,12 @@ export interface CustomTabPanelProps {
     index: number;
     value: number;
   }
+  export interface update_statusT{
+    id:string,
+    status:string
+  }
+
+ 
+   
+   
+  

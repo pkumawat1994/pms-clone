@@ -13,6 +13,8 @@ import { appRoutes } from "../routes/appRoutes";
 import { employeeIDT } from "../container/pages/admin/employee/employeeList/IEmployeeList";
 import { signupFormValues } from "../container/pages/admin/employee/addEmployee/IAddEmployee";
 import { addtaskFormValues } from "../container/pages/admin/task/addTask/IAddTask";
+import { update_statusT } from "../container/pages/user/task/taskDetail/ITaskDetail";
+import { toast } from "react-toastify";
 // import { signupFormValues } from "../container/auth/userAuth/signup/ISignup";
 
 function isAxiosError(error: unknown): error is AxiosError {
@@ -113,8 +115,61 @@ export const deleteEmployee = createAsyncThunk(
       const response = await DataService.post(API.DELETE_EMP, obj);
       console.log(response?.data?.message, "DELETE_EMP");
       if (response?.data?.status == 200) {
-        // navigate(appRoutes.EMPLOYEE_LIST);
+        navigate("/admin/dashboard/employee-list");
       }
+      return response;
+    } catch (error: unknown) {
+      if (isAxiosError(error)) {
+        return rejectWithValue((error as AxiosError).response?.data);
+      } else {
+        const responseData = (error as { response?: { data?: [] } })?.response;
+        return rejectWithValue(responseData);
+      }
+    }
+  }
+);
+//delete-task-------
+
+export const deleteTask = createAsyncThunk(
+  "deleteTask",
+  async (
+    { data, navigate }: { data: any; navigate: NavigateFunction },
+    { rejectWithValue }
+  ) => {
+    try {
+      let obj = { id: data };
+      const response = await DataService.post(API.DELETE_TASK, obj);
+      console.log(response?.data?.message, "DELETE_EMP");
+      // if (response?.data?.status == 200) {
+      //   toast.success(response?.data?.message)
+      //   navigate("/admin/dashboard/task-list");
+      // }
+      return response;
+    } catch (error: unknown) {
+      if (isAxiosError(error)) {
+        return rejectWithValue((error as AxiosError).response?.data);
+      } else {
+        const responseData = (error as { response?: { data?: [] } })?.response;
+        return rejectWithValue(responseData);
+      }
+    }
+  }
+);
+// changeStatus
+
+export const updateStatus = createAsyncThunk(
+  "updateStatus",
+  async (
+    { data, navigate }: { data: update_statusT, navigate: NavigateFunction },
+    { rejectWithValue }
+  ) => {
+    try {
+      let obj = { id: data.id,status:data.status };
+      const response = await DataService.post(API.UPDATE_TASK_STATUS, obj);
+      console.log(response?.data?.message, "CHANGE_STATUS");
+      // if (response?.data?.status == 200) {
+      //   navigate(appRoutes.T_LIST);
+      // }
       return response;
     } catch (error: unknown) {
       if (isAxiosError(error)) {
@@ -182,6 +237,8 @@ export const adminResetPassword = createAsyncThunk(
   }
 );
 
+
+
 export const userResetPassword = createAsyncThunk(
   "auth/userResetPassword",
   async (
@@ -191,12 +248,12 @@ export const userResetPassword = createAsyncThunk(
     try {
       console.log(data, "comingData");
       DataService.defaults.headers.common["auth"] = data?.token;
-      const response = await DataService.post(API.ADMIN_RESET_PASSWORD, {
+      const response = await DataService.post(API.USER_RESET_PASSWORD, {
         newPassword: data?.newPassword,
       });
-      console.log("response-reset", response);
+      console.log("employee-response-reset", response);
       if (response?.data?.status == 200) {
-        navigate(appRoutes.ADMIN_LOGIN);
+        navigate(appRoutes.USER_LOGIN);
       }
       return response;
     } catch (error: unknown) {
@@ -356,14 +413,14 @@ export const userOtpVerify = createAsyncThunk(
   ) => {
     try {
       DataService.defaults.headers.common["auth"] = data.token;
-      const response = await DataService.post(API.ADMIN_OTP_VERIFY, {
+      const response = await DataService.post(API.USER_OTP_VERIFY, {
         otp: data?.otp,
       });
       console.log(response, "ressppToken");
 
-      // if (response?.data?.status == 200) {
-      //   navigate(appRoutes.RESET_PASSWORD, { state: response?.data?.data?.token });
-      // }
+      if (response?.data?.status == 200) {
+        navigate(appRoutes.USER_RESET_PASSWORD, { state: response?.data?.data?.token });
+      }
       return response;
     } catch (error: unknown) {
       if (isAxiosError(error)) {
@@ -387,11 +444,11 @@ export const loginUser = createAsyncThunk(
   ) => {
     try {
       const response = await DataService.post(API.USER_LOGIN, data);
-      console.log("login-res", response);
+      console.log("user-login-res", response);
       if (response.data.status == 200) {
         localStorage.setItem("userToken", response?.data?.data?.token);
-        alert("navigate-on-page");
-        // navigate(appRoutes.ADMIN_DASHBOARD);
+     
+        navigate(appRoutes.USER_DASHBOARD);
       }
       return response;
     } catch (error: unknown) {
@@ -429,6 +486,33 @@ export const sendTimerData = createAsyncThunk(
 
 export const addEmployee = createAsyncThunk(
   "auth/addEmployee",
+  async (
+    { data, navigate }: { data: signupFormValues; navigate: NavigateFunction },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await DataService.post(API.USER_REGISTER, data);
+      console.log("login-res", response);
+      if (response.data.status == 201) {
+        navigate("/admin/dashboard/employee-list");
+      }
+      return response;
+    } catch (error: unknown) {
+      if (isAxiosError(error)) {
+        return rejectWithValue((error as AxiosError).response?.data);
+      } else {
+        const responseData = (error as { response?: { data?: [] } })?.response
+          ?.data;
+        return rejectWithValue(responseData);
+      }
+    }
+  }
+);
+
+
+//update-employee------------
+export const updateEmployee = createAsyncThunk(
+  "auth/updateEmployee",
   async (
     { data, navigate }: { data: signupFormValues; navigate: NavigateFunction },
     { rejectWithValue }

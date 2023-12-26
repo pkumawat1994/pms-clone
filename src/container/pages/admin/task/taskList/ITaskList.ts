@@ -1,4 +1,5 @@
-export interface taskId {
-    id: string;
+// export interface taskId {
+//     id: string;
    
-  }
+//   }
+  export type taskId = string;

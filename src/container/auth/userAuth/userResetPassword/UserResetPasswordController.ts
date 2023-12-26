@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 
 import { resetPassValidationSchema } from "../../../../validation/AllValidation";
-import { adminResetPassword, adminForgotPassword } from "../../../../redux";
+import { adminResetPassword, adminForgotPassword, userResetPassword } from "../../../../redux";
 import { useLocation, useNavigate } from "react-router-dom";
 import { UserResetPasswordT } from "./IUserResetPassword"; 
 import { useAppDispatch } from "../../../../redux/store";
@@ -25,7 +25,7 @@ export const UserResetPasswordController = () => {
     validationSchema:resetPassValidationSchema,
     onSubmit: (values:UserResetPasswordT) => {
       let addTokenInObj={...values,token:tokenFormRoute}
-        dispatch(adminResetPassword({ data: addTokenInObj, navigate }));
+        dispatch(userResetPassword({ data: addTokenInObj, navigate }));
     },
   });
 

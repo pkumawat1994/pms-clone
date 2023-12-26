@@ -10,6 +10,7 @@ import {
   userForgotPassword,
   userOtpVerify,
   addEmployee,
+  userResetPassword,
   // signUpUSer,
 } from "../..";
 import { toast } from "react-toastify";
@@ -20,7 +21,7 @@ const AuthSlice: any = createSlice({
   initialState: {} as AuthState,
   reducers: {
     logOut: (state) => {
-      state.tokenFromRedux = "";
+      state.adminTokenFromRedux = "";
       localStorage.removeItem("userToken");
     },
   },
@@ -42,7 +43,7 @@ const AuthSlice: any = createSlice({
           { position: "top-center", hideProgressBar: true }
         );
       }, 1000);
-      state.tokenFromRedux = action?.payload?.data?.data?.token;
+      state.adminTokenFromRedux = action?.payload?.data?.data?.token;
       state.loading = false;
     });
 
@@ -64,16 +65,16 @@ const AuthSlice: any = createSlice({
     });
 
     builder.addCase(loginUser.fulfilled, (state, action) => {
-      console.log(action?.payload?.data?.data?.data?.name, "success-login-action");
+      console.log(action?.payload?.data?.data?.data?.emp_name, "success-login-action");
       // toast.success(action?.payload?.data?.message);
 
       setTimeout(() => {
         toast.success(
-          `Welcome Mr.   ${action?.payload?.data?.data?.data?.name}`,
+          `Welcome Mr.   ${action?.payload?.data?.data?.data?.emp_name}`,
           { position: "top-center", hideProgressBar: true }
         );
       }, 1000);
-      state.tokenFromRedux = action?.payload?.data?.data?.token;
+      state.userTokenFromRedux = action?.payload?.data?.data?.token;
       state.loading = false;
     });
 
@@ -192,6 +193,24 @@ const AuthSlice: any = createSlice({
       toast.error(errorMessage);
       state.loading = false;
     });
+
+    //user-reset-password------
+
+    builder.addCase(userResetPassword.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(userResetPassword.fulfilled, (state, action) => {
+      console.log("emp-reset-action")
+      state.loading = false;
+      toast.success(action?.payload?.data?.message);
+    });
+    builder.addCase(userResetPassword.rejected, (state, action) => {
+      const payload = action.payload as rejectedPayload | undefined;
+      const errorMessage = payload?.message;
+      toast.error(errorMessage);
+      state.loading = false;
+    });
+
   },
 });
 export const { logOut } = AuthSlice.actions;
