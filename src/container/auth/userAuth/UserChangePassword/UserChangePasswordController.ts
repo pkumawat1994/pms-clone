@@ -4,7 +4,7 @@ import { useAppDispatch } from "../../../../redux/store";
 
 // import { changePassword } from "../../../../redux";
 import { useNavigate } from "react-router-dom";
-import { UserChangePasswordFormValues } from "./IUserChangepassword";
+import { UserChangePasswordFormValues } from "./IUserChangePassword";
 
 export const UserChangePasswordController = () => {
     let dispatch=useAppDispatch();

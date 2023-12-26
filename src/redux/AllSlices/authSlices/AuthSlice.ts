@@ -6,6 +6,10 @@ import {
   loginAdmin,
   adminOtpVerify,
   adminResetPassword,
+  loginUser,
+  userForgotPassword,
+  userOtpVerify,
+  addEmployee,
   // signUpUSer,
 } from "../..";
 import { toast } from "react-toastify";
@@ -21,7 +25,8 @@ const AuthSlice: any = createSlice({
     },
   },
   extraReducers: (builder) => {
-    //loginUSer------------
+
+    //loginAdmin------------
 
     builder.addCase(loginAdmin.pending, (state, action) => {
       state.loading = true;
@@ -49,7 +54,40 @@ const AuthSlice: any = createSlice({
       state.loading = false;
     });
 
-    //userForgotPassword---------
+
+    //    LOGIN USER------
+
+
+
+    builder.addCase(loginUser.pending, (state, action) => {
+      state.loading = true;
+    });
+
+    builder.addCase(loginUser.fulfilled, (state, action) => {
+      console.log(action?.payload?.data?.data?.data?.name, "success-login-action");
+      // toast.success(action?.payload?.data?.message);
+
+      setTimeout(() => {
+        toast.success(
+          `Welcome Mr.   ${action?.payload?.data?.data?.data?.name}`,
+          { position: "top-center", hideProgressBar: true }
+        );
+      }, 1000);
+      state.tokenFromRedux = action?.payload?.data?.data?.token;
+      state.loading = false;
+    });
+
+    builder.addCase(loginUser.rejected, (state, action) => {
+      console.log(action, "login-user-rejected-action");
+      const payload = action.payload as rejectedPayload | undefined;
+      const errorMessage = payload?.message;
+      toast.error(errorMessage);
+      state.loading = false;
+    });
+
+
+
+    //adminForgotPassword---------
 
     builder
       .addCase(adminForgotPassword.pending, (state, action) => {
@@ -68,21 +106,43 @@ const AuthSlice: any = createSlice({
         state.loading = false;
       });
 
-    //signUpUSer----------
+      //userForgotPassword-----------------
 
-    // builder.addCase(signUpUSer.pending, (state, action) => {
-    //   state.loading = true;
-    // });
-    // builder.addCase(signUpUSer.fulfilled, (state, action) => {
-    //   state.loading = false;
-    //   toast.success(action?.payload?.data?.message);
-    // });
-    // builder.addCase(signUpUSer.rejected, (state, action) => {
-    //   state.loading = false;
-    //   const payload = action.payload as rejectedPayload | undefined;
-    //   const errorMessage = payload?.message;
-    //   toast.error(errorMessage);
-    // });
+
+      builder
+      .addCase(userForgotPassword.pending, (state, action) => {
+        state.loading = true;
+      })
+
+      .addCase(userForgotPassword.fulfilled, (state, action) => {
+        console.log(action?.payload, "success-userforgot-action");
+        state.loading = false;
+        toast.success(action?.payload?.data?.message);
+      })
+
+      .addCase(userForgotPassword.rejected, (state, action) => {
+        console.log(action?.payload, "rejected-userforgot-action");
+        const payload = action.payload as rejectedPayload | undefined;
+        const errorMessage = payload?.message;
+        toast.error(errorMessage);
+        state.loading = false;
+      });
+
+    //add-employee----------
+
+    builder.addCase(addEmployee.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(addEmployee.fulfilled, (state, action) => {
+      state.loading = false;
+      toast.success(action?.payload?.data?.message);
+    });
+    builder.addCase(addEmployee.rejected, (state, action) => {
+      state.loading = false;
+      const payload = action.payload as rejectedPayload | undefined;
+      const errorMessage = payload?.message;
+      toast.error(errorMessage);
+    });
 
     //otp-verify----------
 
@@ -94,6 +154,24 @@ const AuthSlice: any = createSlice({
       toast.success(action?.payload?.data?.message);
     });
     builder.addCase(adminOtpVerify.rejected, (state, action) => {
+      const payload = action.payload as rejectedPayload | undefined;
+      const errorMessage = payload?.message;
+      toast.error(errorMessage);
+      state.loading = false;
+    });
+
+
+    
+
+    //USER-OTP-VERIFY--------
+    builder.addCase(userOtpVerify.pending, (state, action) => {
+      state.loading = true;
+    });
+    builder.addCase(userOtpVerify.fulfilled, (state, action) => {
+      state.loading = false;
+      toast.success(action?.payload?.data?.message);
+    });
+    builder.addCase(userOtpVerify.rejected, (state, action) => {
       const payload = action.payload as rejectedPayload | undefined;
       const errorMessage = payload?.message;
       toast.error(errorMessage);

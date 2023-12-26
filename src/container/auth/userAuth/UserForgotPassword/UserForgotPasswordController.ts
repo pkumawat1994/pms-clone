@@ -1,21 +1,22 @@
 import { useFormik } from "formik";
 
-import {adminForgotPassValidationSchema } from "../../../../validation/AllValidation";
+import {adminForgotPassValidationSchema, userForgotPassValidationSchema } from "../../../../validation/AllValidation";
 import { useAppDispatch } from "../../../../redux/store";
-import { adminForgotPassword } from "../../../../redux";
+// import { adminForgotPassword } from "../../../../redux";
 import { UserforgotFormValues } from "./IUserForgotPassword";
 import { useNavigate } from "react-router-dom";
+import { userForgotPassword } from "../../../../redux";
 
-export const ForgotPasswordController = () => {
+export const UserForgotPasswordController = () => {
     let dispatch=useAppDispatch()
     let navigate=useNavigate();
   const formik = useFormik<UserforgotFormValues>({
     initialValues: {
         email: "",
     },
-    validationSchema:adminForgotPassValidationSchema,
+    validationSchema:userForgotPassValidationSchema,
     onSubmit: (values:UserforgotFormValues) => {
-        dispatch(adminForgotPassword({ data: values, navigate }));
+        dispatch(userForgotPassword({ data: values, navigate }));
     },
   });
 

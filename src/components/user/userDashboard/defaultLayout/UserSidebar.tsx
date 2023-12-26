@@ -29,7 +29,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
   justifyContent: 'flex-end',
 }));
-const AdminSidebar = ({open,handleDrawerClose}:any) => {
+const UserSidebar = ({open,handleDrawerClose}:any) => {
   const theme = useTheme();
 
   return (
@@ -41,6 +41,7 @@ const AdminSidebar = ({open,handleDrawerClose}:any) => {
           '& .MuiDrawer-paper': {
             width: drawerWidth,
             boxSizing: 'border-box',
+            backgroundColor: '#273c75', 
           },
         }}
         variant="persistent"
@@ -53,25 +54,17 @@ const AdminSidebar = ({open,handleDrawerClose}:any) => {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List>
-       
-            <ListItem disablePadding>
-            <Link to="/admin/dashboard/task-list"><ListItemButton>
+
+        <List className="tab-list">
+            <ListItem >
+            <Link to="/user/dashboard/task-list"><ListItemButton>
               <ListItemIcon>
                <MailIcon />
               </ListItemIcon>
-              <ListItemText primary={"TASK LIST"} />
+              <ListItemText primary={"TASK LIST"} className='tab-text' />
             </ListItemButton></Link>
           </ListItem>
 
-          <ListItem disablePadding>
-           <Link to="/admin/dashboard/employee-list"> <ListItemButton>
-              <ListItemIcon>
-               <MailIcon />
-              </ListItemIcon>
-              <ListItemText primary={"EMPLOYEE LIST"} />
-            </ListItemButton></Link>
-          </ListItem>
        
         </List>
         <Divider />
@@ -81,4 +74,4 @@ const AdminSidebar = ({open,handleDrawerClose}:any) => {
   )
 }
 
-export default AdminSidebar
+export default UserSidebar

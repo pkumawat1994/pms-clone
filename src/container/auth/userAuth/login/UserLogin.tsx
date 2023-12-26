@@ -68,7 +68,7 @@ const AdminLogin: React.FC = () => {
             />
             <ComponentIndex.Box className="remeber-box">
               <ComponentIndex.FormControlLabel control={<ComponentIndex.Checkbox />} label="Remember me" />
-              <Link to="/forgot-password"><p>forgot password </p></Link>
+              <Link to="/user-forgot-password"><p>forgot password </p></Link>
             </ComponentIndex.Box>
 
 
@@ -81,7 +81,7 @@ const AdminLogin: React.FC = () => {
 
             <ComponentIndex.Box>
             </ComponentIndex.Box>
-            <ComponentIndex.Typography>Not a member ?<ComponentIndex.Link to="/signup">SIGNUP</ComponentIndex.Link></ComponentIndex.Typography>
+            {/* <ComponentIndex.Typography>Not a member ?<ComponentIndex.Link to="/signup">SIGNUP</ComponentIndex.Link></ComponentIndex.Typography> */}
 
 
           </form>

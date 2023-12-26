@@ -36,7 +36,7 @@ export const EmployeeListController = () => {
   const handleEdit = (data: {}) => {
     // Handle edit logic with the provided ID
     console.log(data);
-    navigate("/dashboard/add-employee", { state: { data } });
+    navigate("/admin/dashboard/add-employee", { state: { data } });
   };
   
   return {

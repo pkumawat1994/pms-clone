@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 
 import { otpValidationSchema } from "../../../../validation/AllValidation";
 import { useAppDispatch } from "../../../../redux/store";
-import { adminOtpVerify } from "../../../../redux";
+import { adminOtpVerify, userOtpVerify } from "../../../../redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
 export const UserOtpVerifyController = () => {
@@ -15,7 +15,7 @@ export const UserOtpVerifyController = () => {
 
   const handleOtpSubmit = (value: string) => {
     let newObj = { token: tokenFormRoutes, otp: value };
-    // dispatch(adminOtpVerify({ data: newObj, navigate }));
+    dispatch(userOtpVerify({ data: newObj, navigate }));
   };
 
   return {

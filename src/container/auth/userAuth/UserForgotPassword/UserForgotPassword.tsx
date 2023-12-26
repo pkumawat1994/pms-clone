@@ -1,13 +1,13 @@
 import React from 'react'
 import ComponentIndex from '../../../../components/ComponentIndex'
-import { ForgotPasswordController } from './UserForgotPasswordController'
+import { UserForgotPasswordController } from './UserForgotPasswordController' 
 
 const UserForgotPassword = () => {
-    const { formik } = ForgotPasswordController()
+    const { formik } = UserForgotPasswordController()
     return (<><ComponentIndex.Box className="forgot-pass-box">
 
         <ComponentIndex.Box className="forgot-form">
-            <h1>User Forgot password</h1>
+            <h1>Employee Forgot password</h1>
             <form onSubmit={formik.handleSubmit}>
 
                 <ComponentIndex.TextField

@@ -10,10 +10,16 @@ import ProtectedRoutes from './ProtectedRoutes'
 import { appRoutes } from './appRoutes'
 import AdminDashboard from '../components/admin/dashboard/AdminDashboard'
 import AdminLogin from '../container/auth/userAuth/login/UserLogin'
-import Signup from '../container/pages/admin/employee/addEmployee/SignUp'
+import Signup from '../container/pages/admin/employee/addEmployee/AddEmployee'
 import EmployeeList from '../container/pages/admin/employee/employeeList/EmployeeList'
 import TaskList from '../container/pages/admin/task/taskList/TaskList'
 import AddTask from '../container/pages/admin/task/addTask/AddTask'
+import UserForgotPassword from '../container/auth/userAuth/UserForgotPassword/UserForgotPassword'
+import UserOtpVerify from '../container/auth/userAuth/userOtpVerify/UserOtpVerify'
+import UserResetPassword from '../container/auth/userAuth/userResetPassword/UserResetPassword'
+import UserDashboard from '../components/user/userDashboard/UserDashboard'
+import UserTaskList from '../container/pages/user/task/userTaskList/UserTaskList'
+import TaskDetail from '../container/pages/user/task/taskDetail/TaskDetail'
 
 // import UserLogin from '../container/auth/userAuth/login/UserLogin'
 // import Signup from '../container/auth/userAuth/signup/SignUp'
@@ -25,18 +31,40 @@ const PublicRoutes = () => {
     <Routes>
     {/* <Route  path={appRoutes.USER_LOGIN} element={<UserLogin/>}  /> */}
         <Route  path={appRoutes.FORGOT_PASSWORD} element={<ForgotPassword/>}  />
+        <Route  path={appRoutes.USER_FORGOT_PASSWORD} element={<UserForgotPassword/>}  />
+
         <Route  path={appRoutes.RESET_PASSWORD} element={<ResetPassword/>}  />
+        <Route  path={appRoutes.USER_RESET_PASSWORD} element={<UserResetPassword/>}  />
+
+
         <Route  path={appRoutes.ADMIN_OTP_VERIFY} element={<OtpVerify/>}  />
+        <Route  path={appRoutes.EMPLOYEE_OTP_VERIFY} element={<UserOtpVerify/>}  />
+
         <Route  path={appRoutes.CHANGE_PASSWORD} element={<ChangePassword/>}  />
         <Route  path={appRoutes.ADMIN_LOGIN} element={<Login/>}  />
         <Route  path={appRoutes.USER_LOGIN} element={<AdminLogin/>}  />
 
-        <Route path="dashboard" element={<AdminDashboard />}>
+        <Route path="admin/dashboard" element={<AdminDashboard />}>
         <Route  path={appRoutes.ADD_EMPLOYEE} element={<Signup/>}  />
         <Route  path={appRoutes.EMPLOYEE_LIST} element={<EmployeeList/>}  />
         <Route  path={appRoutes.TASK_LIST} element={<TaskList/>}  />
         <Route  path={appRoutes.ADD_TASK} element={<AddTask/>}  />
         </Route>
+
+        <Route path="user/dashboard" element={<UserDashboard />}>
+        <Route  path={appRoutes.TASK_LIST} element={<UserTaskList/>}  />
+        <Route  path={appRoutes.USER_TASK_DETAIL} element={<TaskDetail/>}  />
+
+
+            {/* <Route path="" element={<Home />} />
+            
+
+            <Route path="add-subAdmin" element={<AddSubAdmin />} />
+            <Route path="edit-profile" element={<EditProfile />} />
+
+            <Route path="add-team" element={<AddTeam />} /> 
+            <Route path="team-list" element={<TeamList />} /> */}
+            </Route>
 
         
         {/* <Route element={<UserPrivateRoutes />}>

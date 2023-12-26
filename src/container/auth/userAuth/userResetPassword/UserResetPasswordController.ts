@@ -25,7 +25,7 @@ export const UserResetPasswordController = () => {
     validationSchema:resetPassValidationSchema,
     onSubmit: (values:UserResetPasswordT) => {
       let addTokenInObj={...values,token:tokenFormRoute}
-        // dispatch(adminResetPassword({ data: addTokenInObj, navigate }));
+        dispatch(adminResetPassword({ data: addTokenInObj, navigate }));
     },
   });
 

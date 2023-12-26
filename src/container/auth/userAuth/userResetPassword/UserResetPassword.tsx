@@ -3,7 +3,7 @@ import ComponentIndex from '../../../../components/ComponentIndex'
 import { UserResetPasswordController } from './UserResetPasswordController'
 
 
-const ResetPassword = () => {
+const UserResetPassword = () => {
     const { formik ,handleClickShowPassword,handleClickShowCPassword,showPassword,showCPassword} = UserResetPasswordController()
     return (
         <>{console.log(formik.errors, "formik-error")}
@@ -88,4 +88,4 @@ const ResetPassword = () => {
     )
 }
 
-export default ResetPassword
+export default UserResetPassword

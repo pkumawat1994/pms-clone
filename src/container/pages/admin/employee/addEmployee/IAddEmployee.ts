@@ -1,3 +1,5 @@
+import { boolean } from "yup";
+
 export interface signupFormValues {
     emp_name:string;
     emp_phoneNumber:string;
@@ -9,7 +11,13 @@ export interface signupFormValues {
     emp_dateofbirth:string;
   }
 
+export interface rolelistMap {
+  
+    _id: string;
+    roleName: string;
+    isDeleted: boolean
 
+}
 
 //   emp_name,
 //   emp_email,

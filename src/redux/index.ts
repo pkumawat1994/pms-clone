@@ -11,7 +11,7 @@ import { API } from "../config/Api";
 import { AxiosError } from "axios";
 import { appRoutes } from "../routes/appRoutes";
 import { employeeIDT } from "../container/pages/admin/employee/employeeList/IEmployeeList";
-import { signupFormValues } from "../container/pages/admin/employee/addEmployee/ISignup";
+import { signupFormValues } from "../container/pages/admin/employee/addEmployee/IAddEmployee";
 import { addtaskFormValues } from "../container/pages/admin/task/addTask/IAddTask";
 // import { signupFormValues } from "../container/auth/userAuth/signup/ISignup";
 
@@ -20,14 +20,14 @@ function isAxiosError(error: unknown): error is AxiosError {
 }
 
 export const loginAdmin = createAsyncThunk(
-  "auth/loginUser",
+  "auth/loginAdmin",
   async (
     { data, navigate }: { data: FormValues; navigate: NavigateFunction },
     { rejectWithValue }
   ) => {
     try {
       const response = await DataService.post(API.ADMIN_LOGIN, data);
-      console.log("login-res",response)
+      console.log("login-res", response);
       if (response.data.status == 200) {
         localStorage.setItem("adminToken", response?.data?.data?.token);
         navigate(appRoutes.ADMIN_DASHBOARD);
@@ -50,7 +50,7 @@ export const getRoleList = createAsyncThunk(
   async ({ navigate }: { navigate: NavigateFunction }, { rejectWithValue }) => {
     try {
       const response = await DataService.get(API.GET_ROLELIST);
-      console.log(response?.data, "GET_ROLELIST");
+      console.log(response, "GET_ROLELIST");
 
       return response;
     } catch (error: unknown) {
@@ -63,7 +63,6 @@ export const getRoleList = createAsyncThunk(
     }
   }
 );
-
 
 export const getEmployeeList = createAsyncThunk(
   "getEmployeeList",
@@ -83,8 +82,6 @@ export const getEmployeeList = createAsyncThunk(
     }
   }
 );
-
-
 
 export const getTaskList = createAsyncThunk(
   "getTaskList",
@@ -129,6 +126,8 @@ export const deleteEmployee = createAsyncThunk(
     }
   }
 );
+
+//ADMIN-FORGOT PASSWORD----
 export const adminForgotPassword = createAsyncThunk(
   "adminForgotPassword",
   async (
@@ -170,6 +169,62 @@ export const adminResetPassword = createAsyncThunk(
       console.log("response-reset", response);
       if (response?.data?.status == 200) {
         navigate(appRoutes.ADMIN_LOGIN);
+      }
+      return response;
+    } catch (error: unknown) {
+      if (isAxiosError(error)) {
+        return rejectWithValue((error as AxiosError).response?.data);
+      } else {
+        const responseData = (error as { response?: { data?: [] } })?.response;
+        return rejectWithValue(responseData);
+      }
+    }
+  }
+);
+
+export const userResetPassword = createAsyncThunk(
+  "auth/userResetPassword",
+  async (
+    { data, navigate }: { data: resetPasswordT; navigate: NavigateFunction },
+    { rejectWithValue }
+  ) => {
+    try {
+      console.log(data, "comingData");
+      DataService.defaults.headers.common["auth"] = data?.token;
+      const response = await DataService.post(API.ADMIN_RESET_PASSWORD, {
+        newPassword: data?.newPassword,
+      });
+      console.log("response-reset", response);
+      if (response?.data?.status == 200) {
+        navigate(appRoutes.ADMIN_LOGIN);
+      }
+      return response;
+    } catch (error: unknown) {
+      if (isAxiosError(error)) {
+        return rejectWithValue((error as AxiosError).response?.data);
+      } else {
+        const responseData = (error as { response?: { data?: [] } })?.response;
+        return rejectWithValue(responseData);
+      }
+    }
+  }
+);
+
+//USER FORGOT PASSWORD-------
+
+export const userForgotPassword = createAsyncThunk(
+  "auth/userForgotPassword",
+  async (
+    { data, navigate }: { data: forgotFormValues; navigate: NavigateFunction },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await DataService.post(API.USER_FORGOT_PASSWORD, data);
+      console.log("forgot-pass", response);
+      if (response?.data?.status == 200) {
+        navigate(appRoutes.EMPLOYEE_OTP_VERIFY, {
+          state: { token: response?.data?.data?.token },
+        });
       }
       return response;
     } catch (error: unknown) {
@@ -274,7 +329,9 @@ export const adminOtpVerify = createAsyncThunk(
       console.log(response, "ressppToken");
 
       if (response?.data?.status == 200) {
-        navigate(appRoutes.RESET_PASSWORD, { state: response?.data?.data?.token });
+        navigate(appRoutes.RESET_PASSWORD, {
+          state: response?.data?.data?.token,
+        });
       }
       return response;
     } catch (error: unknown) {
@@ -289,12 +346,38 @@ export const adminOtpVerify = createAsyncThunk(
   }
 );
 
+//USER-OTP-VERIFY---------------
 
+export const userOtpVerify = createAsyncThunk(
+  "auth/userOtpVerify",
+  async (
+    { data, navigate }: { data: otpObj; navigate: NavigateFunction },
+    { rejectWithValue }
+  ) => {
+    try {
+      DataService.defaults.headers.common["auth"] = data.token;
+      const response = await DataService.post(API.ADMIN_OTP_VERIFY, {
+        otp: data?.otp,
+      });
+      console.log(response, "ressppToken");
 
+      // if (response?.data?.status == 200) {
+      //   navigate(appRoutes.RESET_PASSWORD, { state: response?.data?.data?.token });
+      // }
+      return response;
+    } catch (error: unknown) {
+      if (isAxiosError(error)) {
+        return rejectWithValue((error as AxiosError).response?.data);
+      } else {
+        const responseData = (error as { response?: { data?: [] } })?.response
+          ?.data;
+        return rejectWithValue(responseData);
+      }
+    }
+  }
+);
 
 // user-auth------------------------------------
-
-
 
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
@@ -304,10 +387,10 @@ export const loginUser = createAsyncThunk(
   ) => {
     try {
       const response = await DataService.post(API.USER_LOGIN, data);
-      console.log("login-res",response)
+      console.log("login-res", response);
       if (response.data.status == 200) {
         localStorage.setItem("userToken", response?.data?.data?.token);
-        alert("navigate-on-page")
+        alert("navigate-on-page");
         // navigate(appRoutes.ADMIN_DASHBOARD);
       }
       return response;
@@ -323,23 +406,38 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+//SEND-TIMER-DATA----------------------
 
+export const sendTimerData = createAsyncThunk(
+  "sendTimerData",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await DataService.post(API.UPDATE_TASK_STATUS, data);
+      console.log(response, "response-timer");
+      return response;
+    } catch (error: unknown) {
+      if (isAxiosError(error)) {
+        return rejectWithValue((error as AxiosError).response?.data);
+      } else {
+        const responseData = (error as { response?: { data?: [] } })?.response
+          ?.data;
+        return rejectWithValue(responseData);
+      }
+    }
+  }
+);
 
-
-export const signUpUSer = createAsyncThunk(
-  "auth/signUpUSer",
+export const addEmployee = createAsyncThunk(
+  "auth/addEmployee",
   async (
     { data, navigate }: { data: signupFormValues; navigate: NavigateFunction },
     { rejectWithValue }
   ) => {
     try {
-      
       const response = await DataService.post(API.USER_REGISTER, data);
-      console.log("login-res",response)
-      if (response.data.status == 200) {
-        // localStorage.setItem("userToken", response?.data?.data?.token);
-        alert("navigate-to-login")
-        // navigate(appRoutes.ADMIN_DASHBOARD);
+      console.log("login-res", response);
+      if (response.data.status == 201) {
+        navigate("/admin/dashboard/employee-list");
       }
       return response;
     } catch (error: unknown) {
@@ -353,7 +451,6 @@ export const signUpUSer = createAsyncThunk(
     }
   }
 );
-
 
 export const addTask = createAsyncThunk(
   "auth/addTask",
@@ -362,9 +459,8 @@ export const addTask = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      
       const response = await DataService.post(API.ADD_TASK, data);
-      console.log("ADD_TASK",response)
+      console.log("ADD_TASK", response);
       if (response.data.status == 200) {
         // localStorage.setItem("userToken", response?.data?.data?.token);
         // alert("navigate-to-login")
@@ -382,8 +478,6 @@ export const addTask = createAsyncThunk(
     }
   }
 );
-
-
 
 //get-employee------
 // export const getEmployeeList = createAsyncThunk(

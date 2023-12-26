@@ -4,6 +4,7 @@ import { LoginValidationSchema } from "../../../../validation/AllValidation";
 import { useAppDispatch } from "../../../../redux/store";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../../../../redux";
 // import { loginAdmin } from "../../../../redux";
 
 export const UserLoginController = () => {
@@ -18,7 +19,7 @@ export const UserLoginController = () => {
     validationSchema: LoginValidationSchema,
     onSubmit: (values: FormValues) => {
       console.log("admin-login-form",values)
-      // dispatch(loginAdmin({ data: values,   navigate }));
+      dispatch(loginUser({ data: values,   navigate }));
     },
   });
   const handleClickShowPassword = () => {

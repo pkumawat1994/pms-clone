@@ -35,6 +35,13 @@ export const adminForgotPassValidationSchema = yup.object({
     .required("Email is required "),
 });
 
+export const userForgotPassValidationSchema = yup.object({
+  email: yup
+    .string()
+    .email("Enter a valid email")
+    .required("Email is required "),
+});
+
 export const otpValidationSchema = yup.object({
   otp: yup.string().required("otp is required"),
 });

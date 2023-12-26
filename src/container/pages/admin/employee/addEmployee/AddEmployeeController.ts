@@ -1,25 +1,25 @@
 import { useFormik } from "formik";
-import { signupFormValues } from "./ISignup";
-
-
-// import {  signUpUSer } from "../../../../redux";
+import { signupFormValues } from "./IAddEmployee";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "../../../../../redux/store";
 import { SignupValidationSchema } from "../../../../../validation/AllValidation";
-import { getRoleList, signUpUSer } from "../../../../../redux";
+import { addEmployee, getRoleList } from "../../../../../redux";
+import { AxiosResponse } from "axios";
+import { PayloadAction } from "@reduxjs/toolkit";
 
 
 export const SignupController = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm_Password, setshowConfirm_Password] = useState(false);
+  const [rolelist,setRoleList]=useState([])
 
 
   let dispatch = useAppDispatch();
   let navigate = useNavigate();
  
   let data = useLocation();
-  console.log("data",data)
+  console.log("data",data?.state?.data?.emp_role?.roleName)
 
   const formik = useFormik<signupFormValues>({
     initialValues: {
@@ -28,7 +28,7 @@ export const SignupController = () => {
         emp_email: data?.state?.data ? data?.state?.data?.emp_email : "",
         emp_password: data?.state?.data ? data?.state?.data?.emp_password : "",
         confirm_Password: data?.state?.data ? data?.state?.data?.confirm_Password : "",
-        emp_role: data?.state?.data ? data?.state?.data?.role : "",
+        emp_role: data?.state?.data ? data?.state?.data?.emp_role?._id : "",
         emp_dateofbirth:  data?.state?.data ? data?.state?.data?.emp_dateofbirth :""
 
         // emp_profileImage: "",
@@ -39,7 +39,6 @@ export const SignupController = () => {
     onSubmit: async (values: signupFormValues, actions) => {
 
         console.log("singu-Userrr",values)
-          await dispatch(signUpUSer({ data: values, navigate }));
 
       try {
         actions.setSubmitting(true);
@@ -48,7 +47,8 @@ export const SignupController = () => {
           alert("hello Update");
         } else {
             // console.log("singu-Userrr",values)
-          // await dispatch(signUpUSer({ data: values, navigate }));
+                  await dispatch(addEmployee({ data: values, navigate }));
+
         }
         actions.resetForm();
       } catch (error) {
@@ -68,10 +68,11 @@ export const SignupController = () => {
   };
 
 useEffect(()=>{
-dispatch(getRoleList({ navigate }))
+dispatch(getRoleList({ navigate })).then((res :any)=>setRoleList(res?.payload?.data?.data))
 },[])
   return {
     formik,
+    rolelist,
     handleClickShowPassword,
     data,
     showConfirm_Password,

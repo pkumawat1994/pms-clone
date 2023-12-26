@@ -22,6 +22,8 @@ import {
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { Link } from 'react-router-dom'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default {
     Grid,
@@ -43,6 +45,8 @@ export default {
     Stack,
     Select,
     ArrowBackIcon,
+    RemoveRedEyeIcon,
+    DeleteIcon,
 
     SpeedDial,
     Pagination, IconButton, InputAdornment, Table, TableHead, TableRow, TableCell, TableBody, Dialog,

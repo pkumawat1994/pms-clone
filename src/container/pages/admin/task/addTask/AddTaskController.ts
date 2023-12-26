@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "../../../../../redux/store";
 import { SignupValidationSchema, addTaskValidationSchema } from "../../../../../validation/AllValidation";
-import { addTask, getRoleList, signUpUSer } from "../../../../../redux";
+import { addTask, getRoleList } from "../../../../../redux";
 
 
 export const AddTaskController = () => {
