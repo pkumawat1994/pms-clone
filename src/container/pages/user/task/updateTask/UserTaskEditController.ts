@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { addtaskFormValues } from "./IAddTask";
+
 
 
 // import {  signUpUSer } from "../../../../redux";
@@ -10,6 +10,7 @@ import { SignupValidationSchema, addTaskValidationSchema } from "../../../../../
 import { addTask, getAssigneeList, getRoleList, updateTask } from "../../../../../redux";
 import { AxiosResponse } from "axios";
 import { PayloadAction } from "@reduxjs/toolkit";
+import { userEdittaskFormValues } from "./IUserTaskEdit";
 
 
 export const UserTaskEditController = () => {
@@ -28,7 +29,7 @@ export const UserTaskEditController = () => {
 // ADMIN_GET_ALL_ASSIGNEE_LIST
   },[])
 
-  const formik = useFormik<addtaskFormValues>({
+  const formik = useFormik<userEdittaskFormValues>({
     initialValues: {
         title: data?.state?.data ? data?.state.data?.title : "",
         description: data?.state?.data ? data?.state?.data?.description : "",
@@ -40,7 +41,7 @@ export const UserTaskEditController = () => {
     validateOnChange: true,
     validationSchema: addTaskValidationSchema,
 
-    onSubmit: async (values: addtaskFormValues, actions) => {
+    onSubmit: async (values: userEdittaskFormValues, actions) => {
         console.log("singu-Userrr",values)
 
       try {
