@@ -23,7 +23,8 @@ import { useStopwatch } from "react-timer-hook";
 import { TimerProvider } from "./TimerContext";
 import MyStopwatch from "./MyStopwatch";
 import { useAppDispatch } from "../../../../../redux/store";
-import {  updateStatus } from "../../../../../redux";
+import "./TaskDetail.css"
+import {   updateTaskStatus } from "../../../../../redux";
 
 
 interface TabPanelProps {
@@ -113,6 +114,8 @@ const TaskDetail: React.FC = () => {
     };
   }, []);
 
+ 
+
   const handleStartStop = () => {
     setIsRunning((prevIsRunning) => !prevIsRunning);
   };
@@ -140,7 +143,7 @@ const TaskDetail: React.FC = () => {
   }, [isRunning, seconds, minutes, hours]);
 
   const handleBack = () => {
-    navigate("/admin/task-list");
+    navigate("/admin/dashboard/task-list");
   };
 
   const tabhandleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -155,9 +158,11 @@ const TaskDetail: React.FC = () => {
       }
 
       const handleChange = (event: SelectChangeEvent<string>) => {
+      //  alert(event.target.value)
             setTaskStatus(event.target.value);
-            const modyfyData={id:singleTask?.state?._id,status:taskStatus}
-            // dispatch(updateStatus(modyfyData))
+            const modyfyData={id:singleTask?.state?._id,status:event.target.value}
+            console.log(modyfyData,"modiji")
+            dispatch(updateTaskStatus({data:modyfyData,navigate:navigate}))
           };
 
   return (
@@ -233,17 +238,17 @@ const TaskDetail: React.FC = () => {
                     <MenuItem disabled value="">
                       status
                     </MenuItem>
-                    <MenuItem value={"inProgress"}>IN PROGRESS</MenuItem>
-                    <MenuItem value={"developmentDone"}>
+                
+                    <MenuItem value={"Development Done"}>
                       DEVELOPMENT DONE
                     </MenuItem>
-                    <MenuItem value={"rejected"}>REJECTED</MenuItem>
-                    <MenuItem value={"onHold"}>ON HOLD</MenuItem>
-                    <MenuItem value={"readyForQA"}>READY FOR QA</MenuItem>
-                    <MenuItem value={"reopen"}>REOPEN</MenuItem>
-                    <MenuItem value={"readyForUAT"}>READY FOR UAT</MenuItem>
-                    <MenuItem value={"close"}>CLOSE</MenuItem>
+                    <MenuItem value={"Open"}>OPEN</MenuItem>
+                    <MenuItem value={"In Progress"}>IN PROGRESS</MenuItem>
+                    <MenuItem value={"Rejected"}>REJECTED</MenuItem>
+                    <MenuItem value={"On Hold"}>ON HOLD</MenuItem>
+                    <MenuItem value={"Close"}>CLOSE</MenuItem>
                   </Select>
+                  {/* ("Open","In Progress","Development Done","On Hold","Rejected","Close") */}
                 </Box>
                 <Box className="timer-btn">
                 <TimerProvider>

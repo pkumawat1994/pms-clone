@@ -6,7 +6,7 @@ import ForgotPassword from '../container/auth/adminAuth/forgotPassword/ForgotPas
 import ResetPassword from '../container/auth/adminAuth/resetPassword/ResetPassword'
 import OtpVerify from '../container/auth/adminAuth/otpVerify/OtpVerify'
 import ChangePassword from '../container/auth/adminAuth/changePassword/ChangePassword'
-import ProtectedRoutes from './ProtectedRoutes'
+
 import { appRoutes } from './appRoutes'
 import AdminDashboard from '../components/admin/dashboard/AdminDashboard'
 import AdminLogin from '../container/auth/userAuth/login/UserLogin'
@@ -20,6 +20,7 @@ import UserResetPassword from '../container/auth/userAuth/userResetPassword/User
 import UserDashboard from '../components/user/userDashboard/UserDashboard'
 import UserTaskList from '../container/pages/user/task/userTaskList/UserTaskList'
 import TaskDetail from '../container/pages/user/task/taskDetail/TaskDetail'
+import UserProfileUpdate from '../container/auth/userAuth/profileUpdate/UserProfileUpdate'
 
 // import UserLogin from '../container/auth/userAuth/login/UserLogin'
 // import Signup from '../container/auth/userAuth/signup/SignUp'
@@ -54,7 +55,10 @@ const PublicRoutes = () => {
         <Route path="user/dashboard" element={<UserDashboard />}>
         <Route  path={appRoutes.TASK_LIST} element={<UserTaskList/>}  />
         <Route  path={appRoutes.USER_TASK_DETAIL} element={<TaskDetail/>}  />
+        <Route  path={appRoutes.USER_UPDATE_PROFILE} element={<UserProfileUpdate/>}  />
 
+
+        {/* <Route  path={appRoutes.USER_TASK_DETAIL} element={<TaskDetail/>}  /> */}
 
             {/* <Route path="" element={<Home />} />
             

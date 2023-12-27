@@ -1,8 +1,12 @@
+import EmployeeSlice from "../redux/AllSlices/EmployeeSlice";
+
 let ADMIN = "admin";
 let EMPLOYEE = "employee";
 let COMMON = "common";
 
 export const API = {
+  GET_TASK_LOG_HISTORY:`${COMMON}/create-time-history`,
+  UPDATE_USER_PROFILE:`${EMPLOYEE}/update-profile`,
   UPDATE_TASK_STATUS:`${COMMON}/update-status`,
   ADMIN_LOGIN: `${ADMIN}/login`,
   USER_LOGIN: `${EMPLOYEE}/login`,
@@ -12,7 +16,7 @@ export const API = {
   ADMIN_OTP_VERIFY: `${ADMIN}/verify-otp`,
   ADMIN_RESET_PASSWORD: `${ADMIN}/reset-password`,
   USER_RESET_PASSWORD: `${EMPLOYEE}/reset-password`,
-
+  ADMIN_GET_ALL_ASSIGNEE_LIST:`${EMPLOYEE}/get-all-assignee`,
   GET_EMPLIST: `${EMPLOYEE}/get-all-employees`,
   DELETE_EMP: `${EMPLOYEE}/delete-employee`,
   GET_TASK_LIST:`${COMMON}/get-all-task`,
@@ -24,6 +28,8 @@ export const API = {
 
 
 USER_REGISTER:`${EMPLOYEE}/register`,
+TASK_UPDATE:`${COMMON}/update-task`,
+
 
 
 //task-----

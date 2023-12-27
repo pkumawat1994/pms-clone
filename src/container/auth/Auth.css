@@ -74,10 +74,18 @@
 }
 .form-heading{
   padding: 5px;
-  background-color: rgb(10, 10, 63);
+  background-color: rgb(52, 52, 65);
   color: white;
   margin-bottom: 10px;
 }
+.update-profile-box .form-heading{
+  padding: 5px;
+  background-color: rgba(1, 64, 122, 0.959);
+  color: white;
+  margin-bottom: 5px;
+  border-radius: 20px;
+}
+
 .signup-btn{
   margin-top: 15px;
 }
@@ -105,3 +113,9 @@ margin-top: 10px;
   );
 }
 
+.user-panal-section{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+}

@@ -7,6 +7,7 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 import { Outlet } from 'react-router-dom';
 import UserHeader from './defaultLayout/UserHeader';
 import UserSidebar from './defaultLayout/UserSidebar';
+import "../../../container/auth/Auth.css"
 
 const drawerWidth = 240;
 
@@ -33,22 +34,7 @@ interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
 }
 
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== 'open',
-})<AppBarProps>(({ theme, open }) => ({
-  transition: theme.transitions.create(['margin', 'width'], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: `${drawerWidth}px`,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
+
 
 const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',

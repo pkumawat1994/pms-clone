@@ -1,0 +1,19 @@
+.update-profile-box{
+    background-color: rgb(202, 221, 240);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 10px;
+}
+.update-btn-wrapper{
+    display: flex;
+    justify-content: center;
+}
+
+.main-box-update-profile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    text-align: center;
+    
+}

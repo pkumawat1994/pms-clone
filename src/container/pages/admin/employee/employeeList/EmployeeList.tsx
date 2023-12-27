@@ -32,7 +32,7 @@ const EmployeeList = () => {
                     {/* <ComponentIndex.Button onClick={() => handleEdit(params?.row)} color="success" variant="contained" fullWidth type="submit">
                         EDIT
                     </ComponentIndex.Button>&nbsp;&nbsp;&nbsp; */}
-                    <ComponentIndex.Button onClick={() => handleDelete(params.row._id)} color="error" variant="contained" fullWidth type="submit">
+                    <ComponentIndex.Button onClick={() => handleDelete(params?.row?._id)} color="error" variant="contained" fullWidth type="submit">
                         DELETE
                     </ComponentIndex.Button>
                 </>)

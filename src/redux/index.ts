@@ -13,8 +13,9 @@ import { appRoutes } from "../routes/appRoutes";
 import { employeeIDT } from "../container/pages/admin/employee/employeeList/IEmployeeList";
 import { signupFormValues } from "../container/pages/admin/employee/addEmployee/IAddEmployee";
 import { addtaskFormValues } from "../container/pages/admin/task/addTask/IAddTask";
-import { update_statusT } from "../container/pages/user/task/taskDetail/ITaskDetail";
+import { ItaskStatus, update_statusT } from "../container/pages/user/task/taskDetail/ITaskDetail";
 import { toast } from "react-toastify";
+import { updateFormValues } from "../container/auth/userAuth/profileUpdate/IUserProfileUpdate";
 // import { signupFormValues } from "../container/auth/userAuth/signup/ISignup";
 
 function isAxiosError(error: unknown): error is AxiosError {
@@ -104,6 +105,29 @@ export const getTaskList = createAsyncThunk(
   }
 );
 
+//getAssigneeList------------------
+
+
+export const getAssigneeList = createAsyncThunk(
+  "getAssigneeList",
+  async ({ navigate }: { navigate: NavigateFunction }, { rejectWithValue }) => {
+    try {
+      const response = await DataService.get(API.ADMIN_GET_ALL_ASSIGNEE_LIST);
+      console.log(response?.data?.message, "GET_ASSIGNEE_LIST");
+
+      return response;
+    } catch (error: unknown) {
+      if (isAxiosError(error)) {
+        return rejectWithValue((error as AxiosError).response?.data);
+      } else {
+        const responseData = (error as { response?: { data?: [] } })?.response;
+        return rejectWithValue(responseData);
+      }
+    }
+  }
+);
+
+
 export const deleteEmployee = createAsyncThunk(
   "deleteEmployee",
   async (
@@ -140,10 +164,10 @@ export const deleteTask = createAsyncThunk(
       let obj = { id: data };
       const response = await DataService.post(API.DELETE_TASK, obj);
       console.log(response?.data?.message, "DELETE_EMP");
-      // if (response?.data?.status == 200) {
-      //   toast.success(response?.data?.message)
-      //   navigate("/admin/dashboard/task-list");
-      // }
+      if (response?.data?.status == 200) {
+        // toast.success(response?.data?.message)
+        navigate("/admin/dashboard/task-list");
+      }
       return response;
     } catch (error: unknown) {
       if (isAxiosError(error)) {
@@ -157,10 +181,10 @@ export const deleteTask = createAsyncThunk(
 );
 // changeStatus
 
-export const updateStatus = createAsyncThunk(
+export const updateTaskStatus = createAsyncThunk(
   "updateStatus",
   async (
-    { data, navigate }: { data: update_statusT, navigate: NavigateFunction },
+    { data, navigate }: { data: ItaskStatus, navigate: NavigateFunction },
     { rejectWithValue }
   ) => {
     try {
@@ -346,31 +370,31 @@ export const userForgotPassword = createAsyncThunk(
 // );
 
 //UPDATE EMPLOYEE->>>
-// export const updateEmployee = createAsyncThunk(
-//   "auth/updateEmployee",
-//   async (
-//     { data, navigate }: { data: signupFormValues; navigate: NavigateFunction },
-//     { rejectWithValue }
-//   ) => {
-//     try {
-//       console.log("UPDATEDATAWITH_ID", data);
-//       const response = await DataService.post(API.UPDATE_EMPLIST, data);
-//       if (response.data.status == 201) {
-//         console.log(response?.data);
-//         navigate(appRoutes.EMPLOYEE_LIST);
-//       }
-//       return response;
-//     } catch (error: unknown) {
-//       if (isAxiosError(error)) {
-//         return rejectWithValue((error as AxiosError).response?.data);
-//       } else {
-//         const responseData = (error as { response?: { data?: [] } })?.response
-//           ?.data;
-//         return rejectWithValue(responseData);
-//       }
-//     }
-//   }
-// );
+export const updateEmployee = createAsyncThunk(
+  "auth/updateEmployee",
+  async (
+    { data, navigate }: { data: updateFormValues; navigate: NavigateFunction },
+    { rejectWithValue }
+  ) => {
+    try {
+      console.log("UPDATEDATAWITH_ID", data);
+      const response = await DataService.post(API.UPDATE_USER_PROFILE, data);
+      if (response.data.status == 201) {
+        console.log(response?.data);
+        navigate(appRoutes.EMPLOYEE_LIST);
+      }
+      return response;
+    } catch (error: unknown) {
+      if (isAxiosError(error)) {
+        return rejectWithValue((error as AxiosError).response?.data);
+      } else {
+        const responseData = (error as { response?: { data?: [] } })?.response
+          ?.data;
+        return rejectWithValue(responseData);
+      }
+    }
+  }
+);
 
 export const adminOtpVerify = createAsyncThunk(
   "auth/otpVerify",
@@ -493,7 +517,7 @@ export const addEmployee = createAsyncThunk(
     try {
       const response = await DataService.post(API.USER_REGISTER, data);
       console.log("login-res", response);
-      if (response.data.status == 201) {
+      if (response?.data?.status == 201) {
         navigate("/admin/dashboard/employee-list");
       }
       return response;
@@ -509,47 +533,55 @@ export const addEmployee = createAsyncThunk(
   }
 );
 
+// updateTask--------
 
-//update-employee------------
-export const updateEmployee = createAsyncThunk(
-  "auth/updateEmployee",
-  async (
-    { data, navigate }: { data: signupFormValues; navigate: NavigateFunction },
-    { rejectWithValue }
-  ) => {
-    try {
-      const response = await DataService.post(API.USER_REGISTER, data);
-      console.log("login-res", response);
-      if (response.data.status == 201) {
-        navigate("/admin/dashboard/employee-list");
-      }
-      return response;
-    } catch (error: unknown) {
-      if (isAxiosError(error)) {
-        return rejectWithValue((error as AxiosError).response?.data);
-      } else {
-        const responseData = (error as { response?: { data?: [] } })?.response
-          ?.data;
-        return rejectWithValue(responseData);
-      }
-    }
-  }
-);
-
-export const addTask = createAsyncThunk(
-  "auth/addTask",
+export const updateTask = createAsyncThunk(
+  "Employee/updateTask",
   async (
     { data, navigate }: { data: addtaskFormValues; navigate: NavigateFunction },
     { rejectWithValue }
   ) => {
     try {
+      console.log(data,"ediy")
+      const response = await DataService.post(API.TASK_UPDATE, data);
+      console.log("taskUpdate", response);
+      if (response.data.status == 200) {
+        navigate("/admin/dashboard/task-list");
+      }
+      return response;
+    } catch (error: unknown) {
+      if (isAxiosError(error)) {
+        return rejectWithValue((error as AxiosError).response?.data);
+      } else {
+        const responseData = (error as { response?: { data?: [] } })?.response
+          ?.data;
+        return rejectWithValue(responseData);
+      }
+    }
+  }
+);
+
+
+
+
+
+export const addTask = createAsyncThunk(
+  "Employee/addTask",
+  async (
+    { data, navigate }: { data: addtaskFormValues; navigate: NavigateFunction },
+    { rejectWithValue }
+  ) => {
+    try {
+    
       const response = await DataService.post(API.ADD_TASK, data);
       console.log("ADD_TASK", response);
-      if (response.data.status == 200) {
+      if (response?.data?.status == 201) {
+        navigate("/admin/dashboard/task-list");
+
+      }
         // localStorage.setItem("userToken", response?.data?.data?.token);
         // alert("navigate-to-login")
-        navigate(appRoutes.TASK_LIST);
-      }
+    
       return response;
     } catch (error: unknown) {
       if (isAxiosError(error)) {
@@ -590,3 +622,9 @@ export const addTask = createAsyncThunk(
 //     }
 //   }
 // );
+//getHistoryLog------------------
+
+
+
+
+

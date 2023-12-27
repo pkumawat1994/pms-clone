@@ -18,6 +18,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import ComponentIndex from '../../../ComponentIndex';
+import Fade from '@mui/material/Fade';
+import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -63,7 +66,7 @@ const AppBar = styled(MuiAppBar, {
 }));
 
 const DrawerHeader = styled('div')(({ theme }) => ({
-  backgroundColor:"orange",
+  backgroundColor: "orange",
   display: 'flex',
   alignItems: 'center',
   padding: theme.spacing(0, 1),
@@ -73,10 +76,41 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 
-const UserHeader = ({open,handleDrawerOpen}:any) => {
+const UserHeader = ({ open, handleDrawerOpen }: any) => {
+
+ 
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const profileOpen = Boolean(anchorEl);
+  let navigate=useNavigate();
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleNavigateProfile=(navigateDestination:string)=>{
+    if(navigateDestination=="profile"){
+
+      navigate("/user/dashboard/employee-update-profile")
+      handleClose()
+    }
+
+    if(navigateDestination=="logout"){
+
+      alert(navigateDestination)
+      handleClose()
+    }
+  }
+    
+
+  
+
+ 
+
+  
   return (
- <>
-<AppBar position="fixed" open={open}  sx={{ backgroundColor: '#192a56' }}>
+    <>
+      <AppBar position="fixed" open={open} sx={{ backgroundColor: '#192a56' }}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -87,12 +121,45 @@ const UserHeader = ({open,handleDrawerOpen}:any) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
-            User Dashboard
-          </Typography>
+          <ComponentIndex.Box className="user-panal-section">
+            <Typography variant="h6" noWrap component="div">
+              User Dashboard
+            </Typography>
+            <div>
+      <ComponentIndex.Button
+        id="fade-button"
+        variant='contained'
+        aria-controls={profileOpen ? 'fade-menu' : undefined}
+        aria-haspopup="true"
+        aria-expanded={profileOpen ? 'true' : undefined}
+        onClick={handleClick}
+      >
+        Profile
+      </ComponentIndex.Button>
+      <ComponentIndex.Menu
+        id="fade-menu"
+        MenuListProps={{
+          'aria-labelledby': 'fade-button',
+        }}
+        anchorEl={anchorEl}
+        open={profileOpen}
+        onClose={handleClose}
+        TransitionComponent={Fade}
+      >
+        <ComponentIndex.MenuItem onClick={()=>handleNavigateProfile("profile")}>Profile</ComponentIndex.MenuItem>
+        <ComponentIndex.MenuItem onClick={handleClose}>My account</ComponentIndex.MenuItem>
+        <ComponentIndex.MenuItem onClick={()=>handleNavigateProfile("logout")}>Logout</ComponentIndex.MenuItem>
+      </ComponentIndex.Menu>
+    </div>
+
+          </ComponentIndex.Box>
+
+
+
         </Toolbar>
+
       </AppBar>
- </>
+    </>
   )
 }
 

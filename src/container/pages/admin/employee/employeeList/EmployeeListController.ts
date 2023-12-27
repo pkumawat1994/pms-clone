@@ -21,7 +21,7 @@ export const EmployeeListController = () => {
   const handleDelete = (id: employeeIDT) => {
     dispatch(deleteEmployee({ data: id, navigate })).then((res:any) => {
         // console.log(res,"deleteEmployee-response")
-      if (res.payload.data.status == 200) {
+      if (res.payload?.data?.status == 200) {
         dispatch(getEmployeeList({ navigate })).then((res: any) =>
       setEmployeeData(res?.payload?.data?.data)
     );

@@ -12,7 +12,7 @@ import { AxiosResponse } from "axios";
 import { PayloadAction } from "@reduxjs/toolkit";
 
 
-export const AddTaskController = () => {
+export const UserTaskEditController = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm_Password, setshowConfirm_Password] = useState(false);
   const [assigneeList,setAssigneeList]=useState([])
@@ -24,7 +24,7 @@ export const AddTaskController = () => {
   let data = useLocation();
   // console.log("lova",data?.state?.data)
   useEffect(()=>{
-dispatch(getAssigneeList({navigate})).then((res:any)=>{setAssigneeList(res?.payload?.data?.data)})
+// dispatch(getAssigneeList({navigate})).then((res:any)=>{setAssigneeList(res?.payload?.data?.data)})
 // ADMIN_GET_ALL_ASSIGNEE_LIST
   },[])
 
@@ -71,16 +71,16 @@ dispatch(getAssigneeList({navigate})).then((res:any)=>{setAssigneeList(res?.payl
     setshowConfirm_Password(!showConfirm_Password);
   };
 
-useEffect(()=>{
-dispatch(getRoleList({ navigate }))
-},[])
+// useEffect(()=>{
+// dispatch(getRoleList({ navigate }))
+// },[])
   return {
     formik,
     handleClickShowPassword,
     data,
     assigneeList,
-    showConfirm_Password,
-    handleClickConfirmShowPassword,
-    showPassword
+  
+   
+  
   };
 };

@@ -1,16 +1,72 @@
+// import React from 'react'
+
+// const UserProfileUpdate = () => {
+//   return (
+//     <div>UserProfileUpdate</div>
+//   )
+// }
+
+// export default UserProfileUpdate
+
+
+
 import React from 'react';
-import { SignupController } from './AddEmployeeController';
-import "./AddEmployee.css"
-import ComponentIndex from '../../../../../components/ComponentIndex';
-import { rolelistMap } from './IAddEmployee';
+
+import "./UserProfileUpdate.css"
+
+
+import ComponentIndex from '../../../../components/ComponentIndex';
+import { rolelistMap } from './IUserProfileUpdate';
+import { UserProfileUpdateController } from './UserProfileUpdateController';
 
 const Signup: React.FC = () => {
-    const { formik, data, rolelist, showPassword, handleClickShowPassword, handleClickConfirmShowPassword, showConfirm_Password } = SignupController()
+    const { formik, data, rolelist } = UserProfileUpdateController()
     return (
         <>
-            <ComponentIndex.Box className="register_box">
+            {/* <ComponentIndex.Box className="main-box-update-profile">
+                <ComponentIndex.Grid container spacing={2}>
+<ComponentIndex.Grid item lg={6}>
+
+NAME
+
+</ComponentIndex.Grid>
+<ComponentIndex.Grid>
+
+<ComponentIndex.TextField
+                        fullWidth
+                        size="small"
+                        className="form-input"
+                        id="emp_name"
+                        inputProps={{
+                            maxLength: 20,
+                        }}
+                        name="emp_name"
+                        label="Name"
+                        value={formik.values.emp_name}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                            const newValue = e.target.value.replace(/[^A-Za-z]/g, "");
+                            formik.setFieldValue("emp_name", newValue);
+                        }}
+                        onBlur={formik.handleBlur}
+                        error={formik.touched.emp_name && Boolean(formik.errors.emp_name)}
+                        helperText={formik.touched.emp_name && formik.errors.emp_name}
+                    />
+</ComponentIndex.Grid>
+                    
+
+
+
+                </ComponentIndex.Grid>
+
+
+
+            </ComponentIndex.Box> */}
+
+
+
+            <ComponentIndex.Box className="update-profile-box">
                 <ComponentIndex.Box className="form-heading">
-                    <h3 style={{ textAlign: "center"  }}>{data?.state?.data ? "UPDATE EMPLOYEEE" : "ADD EMPLOYEE"}</h3>
+                    <h3 style={{ textAlign: "center" }}>{"UPDATE PROFILE"}</h3>
                 </ComponentIndex.Box>
                 <form onSubmit={formik.handleSubmit}>
                     <ComponentIndex.Grid container spacing={2}>
@@ -84,7 +140,7 @@ const Signup: React.FC = () => {
 
                         </ComponentIndex.Grid>
 
-                        <ComponentIndex.Grid item xs={6}>
+                        {/* <ComponentIndex.Grid item xs={6}>
                             {data?.state?.data ? (
                                 ""
                             ) : (
@@ -180,7 +236,7 @@ const Signup: React.FC = () => {
                                     }}
                                 />
                             )}
-                        </ComponentIndex.Grid>
+                        </ComponentIndex.Grid> */}
 
 
                         <ComponentIndex.Grid item xs={6}>
@@ -244,21 +300,29 @@ const Signup: React.FC = () => {
 
                         </ComponentIndex.Grid>
 
-                        <ComponentIndex.Grid item xs={12}>
 
-                            <ComponentIndex.Box className="form-btn-wrap">
-                                <ComponentIndex.Button
-                                    className="form-btn"
-                                    value={data?.state?.data ? "update" : "signup"}
-                                    color="primary"
-                                    variant="contained"
-                                    fullWidth
-                                    type="submit"
-                                >
-                                    {data?.state?.data ? "UPDATE" : "REGISTER EMPLOYEE"}
-                                </ComponentIndex.Button>
+
+
+                        <ComponentIndex.Grid item xs={12}>
+                            <ComponentIndex.Box className="update-btn-wrapper">
+
+                                <ComponentIndex.Box className="form-btn-wrap">
+                                    <ComponentIndex.Button
+                                        className="form-btn"
+                                        value={data?.state?.data ? "update" : "signup"}
+                                        color="primary"
+                                        variant="contained"
+                                        fullWidth
+                                        type="submit"
+                                    >
+                                        UPDATE PROFILE
+                                    </ComponentIndex.Button>
+                                </ComponentIndex.Box>
                             </ComponentIndex.Box>
+
                         </ComponentIndex.Grid>
+
+
 
                     </ComponentIndex.Grid>
                 </form>

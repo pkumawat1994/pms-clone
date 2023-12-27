@@ -1,32 +1,37 @@
 .task-detail-wrapper {
-    height: 100vh;
-    width: 100%;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: rgba(239, 244, 245, 0.884);
-  }
-  .task-detail-wrapper .task-head {
-    display: flex;
-    justify-content: space-between;
-  }
-  .task-detail-wrapper .tast-title{
+  height: 100vh;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: rgba(239, 244, 245, 0.884);
+}
+.task-detail-wrapper .task-head {
+  display: flex;
+  justify-content: space-between;
+}
+.task-detail-wrapper .tast-title {
   font-size: 20px;
   font-weight: 200;
-  }
-  .task-detail-wrapper .tast-description{
-      font-size: 15px;
-      font-weight: 200;
-  }
-  .task-detail-wrapper .task-head .edit-btn{
-     margin: 10px; 
-  }
-  .task-detail-wrapper .task-head-data .btn-box{
-      display: flex;
-      justify-content: space-between;
-  }
-  .timer-btn{
-      margin-top: 10px;
-  }
-  .side-para{
-      color: "#3498db";
-  }
+}
+.task-detail-wrapper .tast-description {
+  font-size: 15px;
+  font-weight: 200;
+}
+.task-detail-wrapper .task-head .edit-btn {
+  margin: 10px;
+}
+.task-detail-wrapper .task-head-data .btn-box {
+  display: flex;
+  justify-content: space-between;
+}
+.timer-btn {
+  margin-top: 10px;
+}
+.side-para {
+  color: "#3498db";
+}
+
+.task-head .task-head-data .btn-box {
+  display: flex;
+  justify-content: end;
+}

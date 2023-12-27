@@ -112,6 +112,32 @@ export const UpdateEmployeeValidationSchema = yup.object({
   
 });
 
+//update-profile---------
+export const UpdateUserProfileValidationSchema = yup.object({
+  emp_name: yup
+    .string()
+    .max(20, "Name cannot exceed 20 characters")
+    .matches(/^[A-Za-z]+$/, "Name should contain only letters")
+    .required("Name is Required"),
+    emp_phoneNumber: yup
+    .string()
+    .required("Mobile number is required")
+    .matches(/^(\+\d{1,3}[- ]?)?\d{10}$/, "Please enter valid mobile number"),
+  emp_email: yup
+    .string()
+    .email("Enter a valid email")
+    .required("Email is required"),
+  
+
+    emp_role: yup
+    .string()
+    .required("role is required"),
+    emp_dateofbirth:yup
+    .string()
+    .required("Please select Birthday "),
+  
+});
+
 
 export const addTaskValidationSchema = yup.object({
   title: yup
@@ -126,7 +152,39 @@ export const addTaskValidationSchema = yup.object({
     .matches(/^[A-Za-z]+$/, "Description should contain only letters")
     .required("Description is Required"),
 
-  assignee: yup
+    assignee: yup
+    .string()
+    .required("Assignee is required"),
+
+    taskDuration: yup
+    .string()
+    .required("TaskDuration is required"),
+
+    assignDate:yup
+    .string()
+    .required("Please select AssignDate "),
+    dueDate:yup.string().required("Please select Due date")
+  
+});
+
+
+//updatetaskvali--------
+
+export const updateTaskValidationSchema = yup.object({
+ 
+  title: yup
+    .string()
+    .max(20, "Title cannot exceed 20 characters")
+    .matches(/^[A-Za-z]+$/, "Name should contain only letters")
+    .required("Title is Required"),
+   
+    description: yup
+    .string()
+    .max(40, "Description cannot exceed 40 characters")
+    .matches(/^[A-Za-z]+$/, "Description should contain only letters")
+    .required("Description is Required"),
+
+    assignee: yup
     .string()
     .required("Assignee is required"),
 
