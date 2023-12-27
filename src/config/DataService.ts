@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const DataService = axios.create({
-  baseURL: "http://192.168.1.5:3030/api/",
+  baseURL: "http://192.168.43.12:3030/api/",
 });
 
 

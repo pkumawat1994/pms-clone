@@ -6,7 +6,8 @@ export const appRoutes = {
   TASK_LIST:"task-list",
   
   ADD_TASK:"add-task",
-  
+  USER_CHANGE_PASSWORD:"employee-change-password",
+  USER_TASK_EDIT:"employee-edit-task",
   USER_UPDATE_PROFILE:"employee-update-profile",
   
   USER_TASK_DETAIL:"task-detail",

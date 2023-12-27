@@ -25,8 +25,8 @@ export const UserTaskEditController = () => {
   let data = useLocation();
   // console.log("lova",data?.state?.data)
   useEffect(()=>{
-// dispatch(getAssigneeList({navigate})).then((res:any)=>{setAssigneeList(res?.payload?.data?.data)})
-// ADMIN_GET_ALL_ASSIGNEE_LIST
+dispatch(getAssigneeList({navigate})).then((res:any)=>{setAssigneeList(res?.payload?.data?.data)})
+
   },[])
 
   const formik = useFormik<userEdittaskFormValues>({
@@ -77,7 +77,6 @@ export const UserTaskEditController = () => {
 // },[])
   return {
     formik,
-    handleClickShowPassword,
     data,
     assigneeList,
   

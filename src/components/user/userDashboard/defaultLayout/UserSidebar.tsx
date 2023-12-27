@@ -56,7 +56,7 @@ const UserSidebar = ({open,handleDrawerClose}:any) => {
         <Divider />
 
         <List className="tab-list">
-            <ListItem >
+            <ListItem className="list-item">
             <Link to="/user/dashboard/task-list"><ListItemButton>
               <ListItemIcon>
                <MailIcon />

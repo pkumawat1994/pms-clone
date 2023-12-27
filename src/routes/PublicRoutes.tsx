@@ -21,6 +21,8 @@ import UserDashboard from '../components/user/userDashboard/UserDashboard'
 import UserTaskList from '../container/pages/user/task/userTaskList/UserTaskList'
 import TaskDetail from '../container/pages/user/task/taskDetail/TaskDetail'
 import UserProfileUpdate from '../container/auth/userAuth/profileUpdate/UserProfileUpdate'
+import UserTaskEdit from '../container/pages/user/task/updateTask/UserTaskEdit'
+import UserChangePassword from '../container/auth/userAuth/UserChangePassword/UserChangePassword'
 
 // import UserLogin from '../container/auth/userAuth/login/UserLogin'
 // import Signup from '../container/auth/userAuth/signup/SignUp'
@@ -56,6 +58,11 @@ const PublicRoutes = () => {
         <Route  path={appRoutes.TASK_LIST} element={<UserTaskList/>}  />
         <Route  path={appRoutes.USER_TASK_DETAIL} element={<TaskDetail/>}  />
         <Route  path={appRoutes.USER_UPDATE_PROFILE} element={<UserProfileUpdate/>}  />
+        <Route  path={appRoutes.USER_CHANGE_PASSWORD} element={<UserChangePassword/>}  />
+
+        <Route  path={appRoutes.USER_TASK_EDIT} element={<UserTaskEdit/>}  />employee-change-password"
+
+        {/* employee-edit-task" */}
 
 
         {/* <Route  path={appRoutes.USER_TASK_DETAIL} element={<TaskDetail/>}  /> */}

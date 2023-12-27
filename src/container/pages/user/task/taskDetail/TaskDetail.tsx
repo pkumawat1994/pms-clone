@@ -165,6 +165,10 @@ const TaskDetail: React.FC = () => {
             dispatch(updateTaskStatus({data:modyfyData,navigate:navigate}))
           };
 
+const handleUserEditTask=()=>{
+  navigate("/user/dashboard/employee-edit-task")
+}
+
   return (
     <>
       <Box className="task-detail-wrapper">
@@ -175,7 +179,7 @@ const TaskDetail: React.FC = () => {
                 <h3 style={{color:"#3498db",fontWeight:"bold"}}>React/Node-025</h3>
               </Box>
               <Box className="btn-box">
-                <Button className="edit-btn" variant="contained">
+                <Button className="edit-btn" onClick={handleUserEditTask} variant="contained">
                   <EditNoteIcon />
                 </Button>
                 <Button

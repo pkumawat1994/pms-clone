@@ -16,6 +16,7 @@ import { addtaskFormValues } from "../container/pages/admin/task/addTask/IAddTas
 import { ItaskStatus, update_statusT } from "../container/pages/user/task/taskDetail/ITaskDetail";
 import { toast } from "react-toastify";
 import { updateFormValues } from "../container/auth/userAuth/profileUpdate/IUserProfileUpdate";
+import { UserChangePasswordFormValues } from "../container/auth/userAuth/UserChangePassword/IUserChangePassword";
 // import { signupFormValues } from "../container/auth/userAuth/signup/ISignup";
 
 function isAxiosError(error: unknown): error is AxiosError {
@@ -319,31 +320,32 @@ export const userForgotPassword = createAsyncThunk(
   }
 );
 
-// export const changePassword = createAsyncThunk(
-//   "changePassword",
-//   async (
-//     {
-//       data,
-//       navigate,
-//     }: { data: ChangePasswordFormValues; navigate: NavigateFunction },
-//     { rejectWithValue }
-//   ) => {
-//     try {
-//       const response = await DataService.post(API.RESET_PASSWORD, data);
-//       if (response?.data?.status == 200) {
-//         navigate(appRoutes.ADMIN_LOGIN);
-//       }
-//       return response;
-//     } catch (error: unknown) {
-//       if (isAxiosError(error)) {
-//         return rejectWithValue((error as AxiosError).response?.data);
-//       } else {
-//         const responseData = (error as { response?: { data?: [] } })?.response;
-//         return rejectWithValue(responseData);
-//       }
-//     }
-//   }
-// );
+export const EmployeeChangePassword = createAsyncThunk(
+  "EmployeeChangePassword",
+  async (
+    {
+      data,
+      navigate,
+    }: { data: UserChangePasswordFormValues; navigate: NavigateFunction },
+    { rejectWithValue }
+  ) => {
+    try {
+      const response = await DataService.post(API.USER_CHANGE_PASSWORD, data);
+      console.log("hii",response)
+      if (response?.data?.status == 200) {
+        navigate("/user/dashboard/");
+      }
+      return response;
+    } catch (error: unknown) {
+      if (isAxiosError(error)) {
+        return rejectWithValue((error as AxiosError).response?.data);
+      } else {
+        const responseData = (error as { response?: { data?: [] } })?.response;
+        return rejectWithValue(responseData);
+      }
+    }
+  }
+);
 
 // export const signUpUSer = createAsyncThunk(
 //   "auth/signUpUSer",
@@ -370,8 +372,8 @@ export const userForgotPassword = createAsyncThunk(
 // );
 
 //UPDATE EMPLOYEE->>>
-export const updateEmployee = createAsyncThunk(
-  "auth/updateEmployee",
+export const updateEmployeeProfile = createAsyncThunk(
+  "auth/updateEmployeeProfile",
   async (
     { data, navigate }: { data: updateFormValues; navigate: NavigateFunction },
     { rejectWithValue }
@@ -381,7 +383,7 @@ export const updateEmployee = createAsyncThunk(
       const response = await DataService.post(API.UPDATE_USER_PROFILE, data);
       if (response.data.status == 201) {
         console.log(response?.data);
-        navigate(appRoutes.EMPLOYEE_LIST);
+        navigate("/user/dashboard/");
       }
       return response;
     } catch (error: unknown) {

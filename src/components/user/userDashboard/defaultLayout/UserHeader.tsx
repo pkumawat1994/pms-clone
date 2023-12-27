@@ -21,27 +21,13 @@ import MailIcon from '@mui/icons-material/Mail';
 import ComponentIndex from '../../../ComponentIndex';
 import Fade from '@mui/material/Fade';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../../../redux/store';
+import { employeeLogOut } from '../../../../redux/AllSlices/authSlices/AuthSlice';
+import { toast } from 'react-toastify';
 
 const drawerWidth = 240;
 
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
-  open?: boolean;
-}>(({ theme, open }) => ({
-  flexGrow: 1,
-  padding: theme.spacing(3),
-  transition: theme.transitions.create('margin', {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  marginLeft: `-${drawerWidth}px`,
-  ...(open && {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
-  }),
-}));
+
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -82,6 +68,7 @@ const UserHeader = ({ open, handleDrawerOpen }: any) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const profileOpen = Boolean(anchorEl);
   let navigate=useNavigate();
+  let dispatch=useAppDispatch()
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -96,9 +83,11 @@ const UserHeader = ({ open, handleDrawerOpen }: any) => {
     }
 
     if(navigateDestination=="logout"){
-
-      alert(navigateDestination)
       handleClose()
+dispatch(employeeLogOut())
+toast.success("logout successfully")
+     navigate("/")
+    
     }
   }
     
@@ -106,7 +95,10 @@ const UserHeader = ({ open, handleDrawerOpen }: any) => {
   
 
  
-
+const handleChangePassword=()=>{
+  navigate("/user/dashboard/employee-change-password")
+  handleClose();
+}
   
   return (
     <>
@@ -148,6 +140,9 @@ const UserHeader = ({ open, handleDrawerOpen }: any) => {
       >
         <ComponentIndex.MenuItem onClick={()=>handleNavigateProfile("profile")}>Profile</ComponentIndex.MenuItem>
         <ComponentIndex.MenuItem onClick={handleClose}>My account</ComponentIndex.MenuItem>
+        <ComponentIndex.MenuItem onClick={handleChangePassword}>Change Password</ComponentIndex.MenuItem>
+
+
         <ComponentIndex.MenuItem onClick={()=>handleNavigateProfile("logout")}>Logout</ComponentIndex.MenuItem>
       </ComponentIndex.Menu>
     </div>

@@ -5,6 +5,7 @@ let EMPLOYEE = "employee";
 let COMMON = "common";
 
 export const API = {
+  USER_CHANGE_PASSWORD:`${EMPLOYEE}/change-password`,
   GET_TASK_LOG_HISTORY:`${COMMON}/create-time-history`,
   UPDATE_USER_PROFILE:`${EMPLOYEE}/update-profile`,
   UPDATE_TASK_STATUS:`${COMMON}/update-status`,

@@ -11,6 +11,7 @@ import {
   userOtpVerify,
   addEmployee,
   userResetPassword,
+  updateEmployeeProfile,
   // signUpUSer,
 } from "../..";
 import { toast } from "react-toastify";
@@ -20,8 +21,8 @@ const AuthSlice: any = createSlice({
   name: "auth",
   initialState: {} as AuthState,
   reducers: {
-    logOut: (state) => {
-      state.adminTokenFromRedux = "";
+    employeeLogOut: (state) => {
+      // state.adminTokenFromRedux = "";
       localStorage.removeItem("userToken");
     },
   },
@@ -106,6 +107,24 @@ const AuthSlice: any = createSlice({
         toast.error(errorMessage);
         state.loading = false;
       });
+//updateEmployeeProfile-------------
+
+builder.addCase(updateEmployeeProfile.pending, (state, action) => {
+  state.loading = true;
+});
+builder.addCase(updateEmployeeProfile.fulfilled, (state, action) => {
+  console.log(action?.payload?.data?.data, "success-login-action");
+  toast.success(action?.payload?.data?.message);
+  state.loading = false;
+});
+
+builder.addCase(updateEmployeeProfile.rejected, (state, action) => {
+  console.log(action, "login-user-rejected-action");
+  const payload = action.payload as rejectedPayload | undefined;
+  const errorMessage = payload?.message;
+  toast.error(errorMessage);
+  state.loading = false;
+});
 
       //userForgotPassword-----------------
 
@@ -213,5 +232,5 @@ const AuthSlice: any = createSlice({
 
   },
 });
-export const { logOut } = AuthSlice.actions;
+export const { employeeLogOut } = AuthSlice.actions;
 export default AuthSlice.reducer;

@@ -5,6 +5,8 @@ import { useAppDispatch } from "../../../../redux/store";
 // import { changePassword } from "../../../../redux";
 import { useNavigate } from "react-router-dom";
 import { UserChangePasswordFormValues } from "./IUserChangePassword";
+import UserChangePassword from "./UserChangePassword";
+import { EmployeeChangePassword } from "../../../../redux";
 
 export const UserChangePasswordController = () => {
     let dispatch=useAppDispatch();
@@ -16,7 +18,7 @@ export const UserChangePasswordController = () => {
     },
     validationSchema:ChangePasswordValidationSchema,
     onSubmit: (values:UserChangePasswordFormValues) => {
-        // dispatch(changePassword( {data: values, navigate}))
+        dispatch(EmployeeChangePassword( {data: values, navigate}))
     },
   });
 

@@ -11,15 +11,12 @@
 
 
 import React from 'react';
-
 import "./UserProfileUpdate.css"
-
-
 import ComponentIndex from '../../../../components/ComponentIndex';
 import { rolelistMap } from './IUserProfileUpdate';
 import { UserProfileUpdateController } from './UserProfileUpdateController';
 
-const Signup: React.FC = () => {
+const UserProfileUpdate: React.FC = () => {
     const { formik, data, rolelist } = UserProfileUpdateController()
     return (
         <>
@@ -332,7 +329,7 @@ NAME
         </>
     )
 }
-export default Signup
+export default UserProfileUpdate
 
 
 

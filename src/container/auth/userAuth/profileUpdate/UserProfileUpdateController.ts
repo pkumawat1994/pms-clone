@@ -10,7 +10,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { useAppDispatch } from "../../../../redux/store";
 import { updateFormValues } from "./IUserProfileUpdate";
 import { UpdateUserProfileValidationSchema } from "../../../../validation/AllValidation";
-import { getRoleList, updateEmployee } from "../../../../redux";
+import { getRoleList, updateEmployeeProfile } from "../../../../redux";
 
 
 export const UserProfileUpdateController = () => {
@@ -43,7 +43,7 @@ export const UserProfileUpdateController = () => {
     onSubmit: async (values: updateFormValues, actions) => {
 
         console.log("Update-Profile",values)
-        await dispatch(updateEmployee({ data: values, navigate }));
+        await dispatch(updateEmployeeProfile({ data: values, navigate }));
 
      
       actions.resetForm();
