@@ -25,6 +25,10 @@ const AuthSlice: any = createSlice({
       // state.adminTokenFromRedux = "";
       localStorage.removeItem("userToken");
     },
+    adminLogout: (state) => {
+      // state.adminTokenFromRedux = "";
+      localStorage.removeItem("adminToken");
+    },
   },
   extraReducers: (builder) => {
 
@@ -232,5 +236,5 @@ builder.addCase(updateEmployeeProfile.rejected, (state, action) => {
 
   },
 });
-export const { employeeLogOut } = AuthSlice.actions;
+export const { employeeLogOut,adminLogout } = AuthSlice.actions;
 export default AuthSlice.reducer;

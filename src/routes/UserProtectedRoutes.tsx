@@ -19,13 +19,13 @@ const isValidToken = (userToken: string | null) => {
   
   
   
-const AdminProtectedRoutes = () => {
+const UserProtectedRoutes = () => {
     const { tokenFromRedux } = useSelector((state: RootState) => state.user);
     const tokenFromLocalStorage = localStorage.getItem('userToken');
   
-    return isValidToken(tokenFromLocalStorage) ? <Outlet /> : <Navigate to="/login" />;
+    return isValidToken(tokenFromLocalStorage) ? <Outlet /> : <Navigate to="/" />;
   };
   
-  export default AdminProtectedRoutes;
+  export default UserProtectedRoutes;
 
 

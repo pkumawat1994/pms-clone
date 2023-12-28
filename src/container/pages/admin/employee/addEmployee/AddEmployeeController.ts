@@ -73,6 +73,18 @@ export const SignupController = () => {
 useEffect(()=>{
 dispatch(getRoleList({ navigate })).then((res :any)=>setRoleList(res?.payload?.data?.data))
 },[])
+
+//name-validate-------
+function processName (nameInput:string) {
+  const inputValue = nameInput.trim();
+  const isValidFormat = /^\S+\s+\S+$/.test(inputValue);
+
+  if (!isValidFormat) {
+      // Invalid input format, prevent further typing
+      nameInput = inputValue.slice(0, -1);
+  }
+}
+
   return {
     formik,
     rolelist,
@@ -80,6 +92,7 @@ dispatch(getRoleList({ navigate })).then((res :any)=>setRoleList(res?.payload?.d
     data,
     showConfirm_Password,
     handleClickConfirmShowPassword,
-    showPassword
+    showPassword,
+    processName
   };
 };

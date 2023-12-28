@@ -28,14 +28,19 @@ dispatch(getAssigneeList({navigate})).then((res:any)=>{setAssigneeList(res?.payl
 // ADMIN_GET_ALL_ASSIGNEE_LIST
   },[])
 
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    // Customize the format based on your needs
+    return date.toISOString().split("T")[0];
+  };
   const formik = useFormik<addtaskFormValues>({
     initialValues: {
         title: data?.state?.data ? data?.state.data?.title : "",
         description: data?.state?.data ? data?.state?.data?.description : "",
         assignee: data?.state?.data ? data?.state?.data?.assignee?._id : "",
         taskDuration: data?.state?.data ? data.state.data.taskDuration: "",
-        assignDate: data?.state?.data ? data?.state?.data?.assignDate : "",
-        dueDate: data?.state?.data ? data?.state?.data?.dueDate : ""
+        assignDate: data?.state?.data ? formatDate(data.state.data.assignDate) : "",
+        dueDate: data?.state?.data ? formatDate(data?.state?.data?.dueDate) : ""
     },
     validateOnChange: true,
     validationSchema: addTaskValidationSchema,

@@ -51,13 +51,13 @@ const AddTask = () => {
                                 name="description"
                                 label="Description"
                                 inputProps={{
-                                    maxLength: 40,
+                                    maxLength: 100,
                                 }}
                                 value={formik.values.description}
                                 onChange={(e) => {
                                     const target = e.target;
-                                    const newValue = e.target.value.replace(/[^A-Za-z]/g, "");
-                                    formik.setFieldValue("description", newValue);
+                                  
+                                    formik.setFieldValue("description", target.value);
                                 }}
                                 onBlur={formik.handleBlur}
                                 error={

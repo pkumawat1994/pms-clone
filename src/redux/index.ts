@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { FormValues } from "../container/auth/adminAuth/login/ILogin";
+import { FormValues } from "../container/auth/adminAuth/login/IAdminLogin";
 import DataService from "../config/DataService";
 import { forgotFormValues } from "../container/auth/adminAuth/forgotPassword/IForgotPassword";
 import { NavigateFunction } from "react-router-dom";

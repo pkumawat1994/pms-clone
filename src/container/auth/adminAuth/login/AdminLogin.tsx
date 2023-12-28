@@ -1,12 +1,13 @@
 import React from 'react';
-import { LoginController } from './LoginController';
+
 import ComponentIndex from '../../../../components/ComponentIndex';
 import "../../../auth/Auth.css"
 import { Link } from 'react-router-dom';
+import { AdminLoginController } from './AdminLoginController';
 
 
-const Login: React.FC = () => {
-  const { formik, handleClickShowPassword, showPassword } = LoginController()
+const AdminLogin: React.FC = () => {
+  const { formik, handleClickShowPassword, showPassword } = AdminLoginController()
 
   return (
     <>
@@ -72,13 +73,13 @@ const Login: React.FC = () => {
             </ComponentIndex.Box>
 
 
-         
-<ComponentIndex.Box className="form-btn-wrap">
-<ComponentIndex.Button color="primary" variant="contained"    className="form-btn" fullWidth type="submit">
-              login
-            </ComponentIndex.Button>
-</ComponentIndex.Box>
-      
+
+            <ComponentIndex.Box className="form-btn-wrap">
+              <ComponentIndex.Button color="primary" variant="contained" className="form-btn" fullWidth type="submit">
+                login
+              </ComponentIndex.Button>
+            </ComponentIndex.Box>
+
             {/* <ComponentIndex.Box>
 
 
@@ -95,6 +96,6 @@ const Login: React.FC = () => {
   )
 }
 
-export default Login
+export default AdminLogin
 
 

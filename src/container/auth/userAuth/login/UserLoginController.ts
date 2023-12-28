@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../../../redux";
 // import { loginAdmin } from "../../../../redux";
 
-export const UserLoginController = () => {
+export const UserLoginController = (userAth:any) => {
+  console.log(userAth,"userAthuserAthuserAth")
   const [showPassword, setShowPassword] = useState(false);
   let dispatch = useAppDispatch();
   let navigate = useNavigate();
@@ -18,7 +19,7 @@ export const UserLoginController = () => {
     },
     validationSchema: LoginValidationSchema,
     onSubmit: (values: FormValues) => {
-      console.log("admin-login-form",values)
+      console.log("user-login-form",values)
       dispatch(loginUser({ data: values,   navigate }));
     },
   });

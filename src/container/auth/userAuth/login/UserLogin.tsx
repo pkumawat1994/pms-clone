@@ -3,10 +3,11 @@ import ComponentIndex from '../../../../components/ComponentIndex';
 import "../../../auth/Auth.css"
 import { Link } from 'react-router-dom';
 import { UserLoginController } from './UserLoginController';
+import { UserLoginProps } from './IUserLogin';
 
 
-const AdminLogin: React.FC = () => {
-  const { formik, handleClickShowPassword, showPassword } = UserLoginController()
+const UserLogin: React.FC<UserLoginProps> = ({setUserAuthenticated}) => {
+  const { formik, handleClickShowPassword, showPassword } = UserLoginController(setUserAuthenticated)
 
   return (
     <>
@@ -91,6 +92,6 @@ const AdminLogin: React.FC = () => {
   )
 }
 
-export default AdminLogin
+export default UserLogin
 
 

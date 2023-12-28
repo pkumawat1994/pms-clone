@@ -1,12 +1,12 @@
 import { useFormik } from "formik";
-import { FormValues } from "./ILogin";
+import { FormValues } from "./IAdminLogin";
 import { LoginValidationSchema } from "../../../../validation/AllValidation";
 import { useAppDispatch } from "../../../../redux/store";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { loginAdmin } from "../../../../redux";
 
-export const LoginController = () => {
+export const AdminLoginController = () => {
   const [showPassword, setShowPassword] = useState(false);
   let dispatch = useAppDispatch();
   let navigate = useNavigate();

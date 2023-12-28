@@ -5,7 +5,7 @@ import ComponentIndex from '../../../../../components/ComponentIndex';
 import { rolelistMap } from './IAddEmployee';
 
 const Signup: React.FC = () => {
-    const { formik, data, rolelist, showPassword, handleClickShowPassword, handleClickConfirmShowPassword, showConfirm_Password } = SignupController()
+    const { formik, data, rolelist, showPassword,processName, handleClickShowPassword, handleClickConfirmShowPassword, showConfirm_Password } = SignupController()
     return (
         <>
             <ComponentIndex.Box className="register_box">
@@ -27,8 +27,12 @@ const Signup: React.FC = () => {
                                 label="Name"
                                 value={formik.values.emp_name}
                                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                    const newValue = e.target.value.replace(/[^A-Za-z]/g, "");
-                                    formik.setFieldValue("emp_name", newValue);
+                                    const newValue = e.target.value.replace(/[^A-Za-z ]/g, ""); // Allow only letters and a single space
+                                
+                                    // Remove leading and trailing spaces
+                                    const trimmedValue = newValue.trim();
+                                
+                                    formik.setFieldValue("emp_name", trimmedValue);
                                 }}
                                 onBlur={formik.handleBlur}
                                 error={formik.touched.emp_name && Boolean(formik.errors.emp_name)}
